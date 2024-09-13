@@ -131,7 +131,39 @@
                     </div>
                 </div>
 
-                <!--AQUI VA LA INFO DE LA MASCOTA QUE TIENE EL PROPIETARIO-->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Mascotas</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Raza</th>
+                                        <th>Edad</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="mascota : ${propietario.mascotas}">
+                                        <td th:text="${mascota.id}"></td>
+                                        <td th:text="${mascota.nombre}"></td>
+                                        <td th:text="${mascota.raza}"></td>
+                                        <td th:text="${mascota.edad}"></td>
+                                        <td th:text="${mascota.estado}"></td>
+                                        <td>
+                                            <a th:href="@{/pet/find/{id}(id=${mascota.id})}" class="btn-detalles">Ver
+                                                Detalles</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
 
                 <a href="javascript:window.history.back();" class="btn-testimonios">Volver</a>
             </div>

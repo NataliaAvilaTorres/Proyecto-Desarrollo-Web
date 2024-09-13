@@ -38,5 +38,10 @@ public class PropietarioServiceImpl implements PropietarioService {
     public void add(Propietario propietario) {
         repo.save(propietario);
     }
+
+    @Override
+    public Propietario findByCedula(String cedula) {
+        return repo.findByCedula(cedula);
+    }
     
 }

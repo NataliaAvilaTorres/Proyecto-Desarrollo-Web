@@ -150,10 +150,12 @@
                             <td th:text="${mascota.raza}"></td>
                             <td th:text="${mascota.edad}"></td>
                             <td th:text="${mascota.enfermedad}"></td>
-                            
+                            <td th:text="${mascota.propietario.cedula}"></td>
+
                             <td><img th:src="${mascota.fotoUrl}" alt="Foto de Mascota" class="pet-photo"></td>
                             <td th:text="${mascota.estado}"
-                                th:classappend="'estado ' + (${mascota.estado} == 'Activo' ? 'activo' : 'inactivo')"></td>
+                                th:classappend="'estado ' + (${mascota.estado} == 'Activo' ? 'activo' : 'inactivo')">
+                            </td>
 
 
                             <!--BOTONES DE ACCIONES-->

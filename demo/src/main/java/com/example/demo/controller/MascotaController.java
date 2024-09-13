@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.Mascota;
+import com.example.demo.model.Propietario;
 import com.example.demo.service.MascotaService;
+import com.example.demo.service.PropietarioService;
 
 @Controller
 @RequestMapping("/pet")
@@ -19,20 +21,26 @@ public class MascotaController {
     @Autowired
     MascotaService mascotaService;
 
+    @Autowired
+    PropietarioService propietarioService;
+
     // http://localhost:8090/veterinario/addMascota
     @GetMapping("/addMascota")
     public String mostrarFormularioPet(Model model) {
         Mascota pet = new Mascota("", "", 0, 0, "", "", "");
         model.addAttribute("mascota", pet);
+        model.addAttribute("propietarios", propietarioService.findAll());
         return "pet_form";
     }
 
     @PostMapping("/agregarMascota")
     public String agregarMascota(@ModelAttribute("mascota") Mascota mascota) {
+        Propietario propietario = propietarioService.findByCedula(mascota.getPropietario().getCedula());
+        mascota.setPropietario(propietario);
         mascotaService.add(mascota);
-        return "redirect:/veterinario/panel"; // Toca cambiar esto
+        return "redirect:/veterinario/panel"; 
     }
-
+    
     @GetMapping("/listMascotas")
     public String mostrarMascotas(Model model) {
 

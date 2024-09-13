@@ -1,8 +1,12 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Propietario {
@@ -16,6 +20,9 @@ public class Propietario {
     private String correo;
     private String celular;
     private String contrasena;
+
+    @OneToMany(mappedBy = "propietario") //Un propietario tiene muchas mascotas
+    private List<Mascota> mascotas = new ArrayList<>(); 
 
     public Propietario() {
     }
@@ -74,6 +81,14 @@ public class Propietario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public List<Mascota> getMascotas() {
+        return mascotas;
+    }
+
+    public void setMascotas(List<Mascota> mascotas) {
+        this.mascotas = mascotas;
     }
 
 }

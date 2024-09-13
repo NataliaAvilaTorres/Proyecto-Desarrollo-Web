@@ -162,8 +162,13 @@
                             </select>
                         </div>
 
-
-                        <!--AQUI VA OTRO CAMPO DE PROPIETARIO-->
+                        <div class="form_group">
+                            <label class="sub_title" for="owner">Propietario</label>
+                            <select id="owner" name="propietario" th:field="*{propietario.cedula}" class="form_style" required>
+                                <option value="" disabled selected>Seleccione un propietario</option>
+                                <option th:each="propietario : ${propietarios}" th:value="${propietario.cedula}" th:text="${propietario.cedula}"></option>
+                            </select>
+                        </div>
 
                         <div>
                             <button type="submit" class="btn">GUARDAR</button>

@@ -12,5 +12,6 @@ public interface PropietarioService {
     public void deleteById(Long id);
     public void update(Propietario propietario);
     public void add(Propietario propietario);
+    public Propietario findByCedula(String cedula);
     
 }

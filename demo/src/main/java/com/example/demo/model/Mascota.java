@@ -1,8 +1,11 @@
 package com.example.demo.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Mascota {
@@ -19,6 +22,11 @@ public class Mascota {
     private String fotoUrl;
     private String estado;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "propietario_id")
+    private Propietario propietario;
+
+    
     public Mascota() {
 
     }
@@ -95,6 +103,14 @@ public class Mascota {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Propietario getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
     }
 
 }
