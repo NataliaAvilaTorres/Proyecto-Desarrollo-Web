@@ -1,0 +1,710 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  min-height: 100vh; /* Asegura que el cuerpo cubra toda la altura de la ventana */
+  background: linear-gradient(
+    to left top,
+    #7fc7d9,
+    #dcf2f1
+  ); /* Aplica el gradiente aquí */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#header ul {
+  display: flex;
+  padding: 15px 30px;
+  gap: 15px;
+  justify-content: end;
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 30px;
+  margin-right: 20px;
+  background-color: #fbf3f3;
+  border-radius: 40px;
+  z-index: 1000;
+}
+
+#header ul li {
+  list-style: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+#header ul li a:hover {
+  padding: 10px 15px;
+  background-color: #0f1035;
+  color: #fbf3f3;
+}
+
+#header ul li a.button:hover {
+  padding: 10px 20px;
+  background-color: #0f1035;
+  color: #fbf3f3;
+}
+
+#header ul li a.button {
+  border: 1px solid #365486;
+  padding: 10px 20px;
+  border-radius: 40px;
+  background-color: #3654861c;
+  color: #365486;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+#header ul li a {
+  text-decoration: none;
+  color: #365486;
+  font-size: 23px;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#logo img {
+  position: absolute;
+  width: 650px;
+  height: 350px;
+  margin-top: 2380px;
+  margin-left: -440px;
+}
+
+main {
+  padding: 60px;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+main h1 {
+  font-size: 110px;
+  font-weight: 900;
+  line-height: 112px;
+  text-align: right;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 0;
+  margin-right: -395px;
+  margin-top: 2550px;
+}
+
+.servicios {
+  text-align: center;
+  z-index: 3;
+  margin-top: 200px;
+  font-size: 45px;
+  font-weight: 900;
+  line-height: 80px;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.descripcion {
+  font-size: 26px;
+  font-weight: 450;
+  line-height: 1.5;
+  color: #0f1035;
+  text-align: right;
+  z-index: 2;
+  max-width: 83%;
+  position: absolute;
+  top: 50%;
+  right: -320px;
+  background-color: transparent;
+}
+
+.btn-testimonios {
+  display: flex;
+  justify-content: center;
+  margin-top: 230px;
+  margin-left: 1130px;
+  text-decoration: none;
+  background-color: #0f1035;
+  color: #f0eded;
+  border-radius: 10px;
+  font-size: 25px;
+  padding: 13px 10px;
+  font-weight: 600;
+  width: 230px;
+}
+
+.btn-testimonios:hover {
+  color: white; /* Mantiene el color blanco al pasar el cursor */
+  background-color: #202379;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none; /* Asegura que no haya subrayado al pasar el cursor */
+}
+
+.social-icons {
+  position: fixed;
+  bottom: 20px;
+  right: 80px;
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+.social-icons img {
+  width: 40px;
+  height: auto;
+}
+
+#header {
+  position: relative;
+  z-index: 999999;
+}
+
+.footer-decorativa {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: 80%;
+  z-index: -1;
+}
+
+.lorenzo-image {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-70%, -50%);
+  width: 800px;
+  height: 900px;
+  z-index: 1;
+  background-color: transparent;
+  border-radius: 10%;
+  overflow: hidden;
+}
+
+.lorenzo-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CSS SOBRE NUESTROS SERVICIOS */
+
+.carousel :where(.card, .img) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel.dragging {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+.carousel.dragging .card {
+  cursor: grab;
+  user-select: none;
+}
+
+.carousel .card {
+  scroll-snap-align: start;
+  height: 400px;
+  list-style: none;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  cursor: pointer;
+  padding-bottom: 15px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.card .img {
+  background: #365486;
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  margin-top: 10px;
+}
+
+.card .img img {
+  width: 140px;
+  height: 140px;
+  margin-top: -1px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #fff;
+}
+
+.card h2 {
+  font-weight: 500;
+  font-size: 1.56rem;
+  margin: 30px 0 5px;
+  color: #365486;
+  margin-top: 30px;
+}
+
+.card span {
+  color: #6a6d78;
+  font-size: 1.3rem;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.wrapper {
+  max-width: 1100px;
+  width: 100%;
+  position: absolute;
+  margin-top: 100px;
+}
+
+.wrapper i {
+  height: 50px;
+  width: 50px;
+  background: #fff;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  font-size: 1.25rem;
+  transform: translateY(-50%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-top: 150px;
+  z-index: 5;
+}
+
+.wrapper i:first-child {
+  left: -35px !important;
+  position: relative !important;
+}
+
+.wrapper i:last-child {
+  right: -35px;
+}
+
+.wrapper .carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% / 3) - 12px);
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: 0;
+  z-index: 1;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* CSS SOBRE NOSOTROS */
+.sobre {
+  margin-bottom: -110px;
+  text-align: center;
+  z-index: 3;
+  margin-top: 850px;
+  margin-left: -560px;
+  font-size: 45px;
+  font-weight: 900;
+  line-height: 80px;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.veterinario {
+  position: relative;
+  margin-left: 680px;
+  z-index: 10;
+}
+
+/* From Uiverse.io by kushalyadavweb */
+.card2 {
+  width: 700px;
+  height: 450px;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+  overflow: visible;
+  margin-top: -550px;
+  margin-right: 150px;
+}
+
+.card2 .item {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.item:hover {
+  transform: scale(1.08);
+  transition: all 350ms ease-in-out;
+}
+
+.item svg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 7px;
+}
+
+.item--1 {
+  background: #365486;
+}
+
+.item--2 {
+  background: #7fc7d9;
+}
+
+.item--3 {
+  background: #0f1035;
+}
+
+.item--4 {
+  background: #dcf2f1;
+}
+
+.quantity {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.text {
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 600;
+}
+
+.text--1 {
+  color: rgba(149, 149, 255, 1);
+  font-size: 23px;
+}
+
+.text--2 {
+  color: rgba(252, 161, 71, 1);
+  font-size: 23px;
+}
+
+.text--3 {
+  color: rgba(66, 193, 110, 1);
+  font-size: 23px;
+}
+
+.text--4 {
+  color: rgba(220, 91, 183, 1);
+  font-size: 23px;
+}
+
+/* CSS TESTIMONIOS */
+
+.testimonios {
+  margin-top: 80px;
+  text-align: center;
+  z-index: 3;
+  font-size: 45px;
+  font-weight: 900;
+  line-height: 80px;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Estilos de la carta (ya proporcionados) */
+.card3 {
+  background-color: #365486;
+  padding-top: 2.5rem;
+  padding-bottom: -1rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  width: 1300px;
+  height: 350px;
+  border-radius: 25px;
+  box-shadow: 0 20px 30px -20px rgba(5, 5, 5, 0.24);
+  margin: 0 15px; /* Añadir margen izquierdo y derecho */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  grid-gap: 1rem;
+  gap: 1rem;
+}
+
+.header .image {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  background-color: royalblue;
+}
+.image img {
+  width: 70px; /* Asegura que la imagen ocupe todo el ancho del contenedor .image */
+  height: 70px; /* Mantiene la proporción de la imagen */
+  border-radius: 50%; /* Convierte la imagen en un círculo */
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  grid-gap: 0.125rem;
+  gap: 0.125rem;
+  color: #dcf2f1;
+}
+
+.stars svg {
+  height: 1rem;
+  width: 1rem;
+}
+
+.name {
+  margin-top: 0.25rem;
+  font-size: 1.2rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: #7fc7d9;
+}
+
+.message {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  margin-top: 1rem;
+  color: rgb(252, 252, 252);
+  font-size: 18px;
+}
+
+/* Estilos del carrusel */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.card3 {
+  margin-right: 20px;
+}
+
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-prev {
+  left: 10px;
+}
+
+.carousel-next {
+  right: 10px;
+}
+
+/* CSS CONTACTANOS */
+.contacto {
+  margin-bottom: -50px;
+  margin-top: 50px;
+  text-align: center;
+  z-index: 3;
+  font-size: 45px;
+  font-weight: 900;
+  line-height: 80px;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.contact-section {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #0f1035;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-section p {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.contact-item {
+  flex: 1;
+  min-width: 200px;
+  margin-right: 20px;
+}
+
+.contact-item:last-child {
+  margin-right: 0;
+}
+
+.contact-item h3 {
+  color: #7fc7d9;
+  margin-bottom: 10px;
+}
+
+.contact-item p {
+  margin: 0;
+  font-family: "poppins", sans-serif;
+  font-size: 16px;
+  color: #fff;
+}
+
+.map-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.map-container h3 {
+  color: #7fc7d9;
+}
+
+.map-container iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* From Uiverse.io by wilsondesouza */
+ul {
+  list-style: none;
+}
+
+.example-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.example-2 .icon-content {
+  margin: 0 10px;
+  position: relative;
+}
+.example-2 .icon-content .tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.example-2 .icon-content:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  top: -50px;
+}
+.example-2 .icon-content a {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #4d4d4d;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+.example-2 .icon-content a:hover {
+  box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+}
+.example-2 .icon-content a svg {
+  position: relative;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+}
+.example-2 .icon-content a:hover {
+  color: white;
+}
+.example-2 .icon-content a .filled {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: #000;
+  transition: all 0.3s ease-in-out;
+}
+.example-2 .icon-content a:hover .filled {
+  height: 100%;
+}
+
+.example-2 .icon-content a[data-social="linkedin"] .filled,
+.example-2 .icon-content a[data-social="linkedin"] ~ .tooltip {
+  background-color: #0274b3;
+}
+
+.example-2 .icon-content a[data-social="github"] .filled,
+.example-2 .icon-content a[data-social="github"] ~ .tooltip {
+  background-color: #24262a;
+}
+.example-2 .icon-content a[data-social="instagram"] .filled,
+.example-2 .icon-content a[data-social="instagram"] ~ .tooltip {
+  background: linear-gradient(
+    45deg,
+    #405de6,
+    #5b51db,
+    #b33ab4,
+    #c135b4,
+    #e1306c,
+    #fd1f1f
+  );
+}
+.example-2 .icon-content a[data-social="youtube"] .filled,
+.example-2 .icon-content a[data-social="youtube"] ~ .tooltip {
+  background-color: #ff0000;
+}
