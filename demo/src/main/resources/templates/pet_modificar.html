@@ -122,7 +122,7 @@
             <div class="container">
                 <div class="form_area">
                     <p class="title">DATOS DE LA MASCOTA</p>
-                    <form th:object="${mascota}" th:action="@{/pet/agregarMascota}" method="POST">
+                    <form th:object="${mascota}" th:action="@{/pet/update/{id}(id=${mascota.id})}" method="POST">
                         <div class="form_group">
                             <label class="sub_title" for="name">Nombre </label>
                             <input placeholder="Ingresa el nombre de tu mascota" class="form_style" type="text"
@@ -166,7 +166,7 @@
                         <!--AQUI VA OTRO CAMPO DE PROPIETARIO-->
 
                         <div>
-                            <button type="submit" class="btn">GUARDAR</button>
+                            <button type="submit" class="btn">ACTUALIZAR</button>
                         </div>
                     </form>
                 </div>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Mascota</title>
-    <link rel="stylesheet" href="/css/pet_form.css">
+    <title>Lista de Propietarios</title>
+    <link rel="stylesheet" href="/css/propietario_list.css" />
+
     <script src="/JavaScript/sidebar.js" defer></script>
+    <script src="/JavaScript/datos.js" defer></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
@@ -15,6 +15,7 @@
 <body>
     <img src="/images/barrasola.png" alt="Barra Decorativa" class="barra-decorativa" />
     <img src="/images/footer.png" alt="Footer Decorativo" class="footer-decorativa" />
+
     <div class="sidebar close">
         <div class="logo">
             <img src="/images/doggin logos/DOGIN VARIACIONES DE COLOR-11.png" alt="Logo Dogin" class="logo-img" />
@@ -82,7 +83,7 @@
                         <div class="name" th:text="${primerNombre}">Nombre del Usuario</div>
                         <div class="job">Veterinario</div>
                     </div>
-                    <a href="/veterinario/logout"><i class="fas fa-right-to-bracket"></i></a>
+                    <a href="/logout"><i class="fas fa-right-to-bracket"></i></a>
                 </div>
             </li>
         </ul>
@@ -112,67 +113,53 @@
             <p>Aquí va el contenido de mis mascotas...</p>
         </section>
 
-        <img src="/images/modificarIcono.png" alt="icono" class="iconoModificar" />
+        <img src="/images/lista.png" alt="icono" class="iconoLista" />
 
         <header id="header">
-            <h1 class="form-title" th:text="${isEdit} ? 'EDITAR MASCOTA' : 'NUEVA MASCOTA'"></h1>
-            <img src="/images/edit.png" alt="icono" class="iconoEdit" />
+            <h1 class="form-title">LISTA DE PROPIETARIOS</h1>
         </header>
-        <main>
-            <div class="container">
-                <div class="form_area">
-                    <p class="title">DATOS DE LA MASCOTA</p>
-                    <form th:object="${mascota}" th:action="@{/pet/agregarMascota}" method="POST">
-                        <div class="form_group">
-                            <label class="sub_title" for="name">Nombre </label>
-                            <input placeholder="Ingresa el nombre de tu mascota" class="form_style" type="text"
-                                id="name" th:field="*{nombre}">
-                        </div>
-                        <div class="form_group">
-                            <label class="sub_title" for="breed">Raza</label>
-                            <input placeholder="Ingresa la raza de tu mascota" class="form_style" type="text" id="breed"
-                                th:field="*{raza}">
-                        </div>
-                        <div class="form_group">
-                            <label class="sub_title" for="age">Edad</label>
-                            <input placeholder="Ingresa la edad de tu mascota" class="form_style" type="number" id="age"
-                                th:field="*{edad}">
-                        </div>
-                        <div class="form_group">
-                            <label class="sub_title" for="weight">Peso</label>
-                            <input placeholder="Ingresa el peso de tu mascota" class="form_style" type="number"
-                                id="weight" th:field="*{peso}">
-                        </div>
-                        <div class="form_group">
-                            <label class="sub_title" for="illness">Enfermedad</label>
-                            <input placeholder="Ingresa si tu mascota tiene alguna enfermedad" class="form_style"
-                                type="text" id="illness" th:field="*{enfermedad}">
-                        </div>
-                        <div class="form_group">
-                            <label class="sub_title" for="photoUrl">Foto (URL)</label>
-                            <input placeholder="Ingresa la URL de la foto de tu mascota" class="form_style" type="text"
-                                id="photoUrl" th:field="*{fotoUrl}">
-                        </div>
-                        <div class="form_group">
-                            <label class="sub_title" for="status">Estado</label>
-                            <select class="form_style" id="status" th:field="*{estado}" required>
-                                <option value="" disabled selected>Seleccione el estado de la mascota</option>
-                                <option value="Activo">Activo</option>
-                                <option value="Inactivo">Inactivo</option>
-                            </select>
-                        </div>
 
 
-                        <!--AQUI VA OTRO CAMPO DE PROPIETARIO-->
 
-                        <div>
-                            <button type="submit" class="btn">GUARDAR</button>
-                        </div>
-                    </form>
+
+        <main class="table" id="customers_table">
+            <section class="table__header">
+                <h1>MASCOTAS</h1>
+                <div class="input-group">
                 </div>
-            </div>
+            </section>
+            <section class="table__body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th> Cédula <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> Nombre <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> Correo <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> Celular <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> Acciones <span class="icon-arrow">&UpArrow;</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="propietario : ${propietarios}">
+                            <td th:text="${propietario.cedula}"></td>
+                            <td th:text="${propietario.nombre}"></td>
+                            <td th:text="${propietario.correo}"></td>
+                            <td th:text="${propietario.celular}"></td>
+
+
+                            <!--BOTONES DE ACCIONES-->
+                            <td>
+                                <a th:href="@{/propietario/find/{id}(id=${propietario.id})}" class="btn-detalles">Ver Detalles</a>
+                                <a th:href="@{/propietario/update/{id}(id=${propietario.id})}" class="btn-editar">Editar</a>
+                                <a th:href="@{/propietario/delete/{id}(id=${propietario.id})}" class="btn-eliminar">Eliminar</a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
         </main>
-    </div>
+        <script src="/JavaScript/script.js" defer></script>
 </body>
 
 </html>

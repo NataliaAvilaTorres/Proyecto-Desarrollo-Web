@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Mascota</title>
-    <link rel="stylesheet" href="/css/pet_form.css">
+    <title>Formulario de Propietario</title>
+    <link rel="stylesheet" href="/css/propietario_form.css">
     <script src="/JavaScript/sidebar.js" defer></script>
 
     <!-- Font Awesome -->
@@ -115,58 +114,38 @@
         <img src="/images/modificarIcono.png" alt="icono" class="iconoModificar" />
 
         <header id="header">
-            <h1 class="form-title" th:text="${isEdit} ? 'EDITAR MASCOTA' : 'NUEVA MASCOTA'"></h1>
+            <h1 class="form-title" th:text="${isEdit} ? 'EDITAR PROPIETARIO' : 'NUEVO PROPIETARIO'"></h1>
             <img src="/images/edit.png" alt="icono" class="iconoEdit" />
         </header>
         <main>
             <div class="container">
                 <div class="form_area">
-                    <p class="title">DATOS DE LA MASCOTA</p>
-                    <form th:object="${mascota}" th:action="@{/pet/agregarMascota}" method="POST">
+                    <p class="title">DATOS DEl PROPIETARIO</p>
+                    <form th:object="${propietario}" th:action="@{/propietario/update/{id}(id=${propietario.id})}"
+                        method="POST">
                         <div class="form_group">
-                            <label class="sub_title" for="name">Nombre </label>
-                            <input placeholder="Ingresa el nombre de tu mascota" class="form_style" type="text"
-                                id="name" th:field="*{nombre}">
+                            <label class="sub_title" for="name">Cedula </label>
+                            <input class="form_style" type="text" id="cedula" th:field="*{cedula}" />
                         </div>
                         <div class="form_group">
-                            <label class="sub_title" for="breed">Raza</label>
-                            <input placeholder="Ingresa la raza de tu mascota" class="form_style" type="text" id="breed"
-                                th:field="*{raza}">
+                            <label class="sub_title" for="name">Nombre</label>
+                            <input class="form_style" type="text" id="nombre" th:field="*{nombre}" />
                         </div>
                         <div class="form_group">
-                            <label class="sub_title" for="age">Edad</label>
-                            <input placeholder="Ingresa la edad de tu mascota" class="form_style" type="number" id="age"
-                                th:field="*{edad}">
+                            <label class="sub_title" for="name">Correo</label>
+                            <input class="form_style" type="text" id="correo" th:field="*{correo}" />
                         </div>
                         <div class="form_group">
-                            <label class="sub_title" for="weight">Peso</label>
-                            <input placeholder="Ingresa el peso de tu mascota" class="form_style" type="number"
-                                id="weight" th:field="*{peso}">
+                            <label class="sub_title" for="name">Celular</label>
+                            <input class="form_style" type="text" id="celular" th:field="*{celular}" />
                         </div>
                         <div class="form_group">
-                            <label class="sub_title" for="illness">Enfermedad</label>
-                            <input placeholder="Ingresa si tu mascota tiene alguna enfermedad" class="form_style"
-                                type="text" id="illness" th:field="*{enfermedad}">
+                            <label class="sub_title" for="name">Contraseña</label>
+                            <input class="form_style" type="text" id="contrasena" th:field="*{contrasena}" />
                         </div>
-                        <div class="form_group">
-                            <label class="sub_title" for="photoUrl">Foto (URL)</label>
-                            <input placeholder="Ingresa la URL de la foto de tu mascota" class="form_style" type="text"
-                                id="photoUrl" th:field="*{fotoUrl}">
-                        </div>
-                        <div class="form_group">
-                            <label class="sub_title" for="status">Estado</label>
-                            <select class="form_style" id="status" th:field="*{estado}" required>
-                                <option value="" disabled selected>Seleccione el estado de la mascota</option>
-                                <option value="Activo">Activo</option>
-                                <option value="Inactivo">Inactivo</option>
-                            </select>
-                        </div>
-
-
-                        <!--AQUI VA OTRO CAMPO DE PROPIETARIO-->
 
                         <div>
-                            <button type="submit" class="btn">GUARDAR</button>
+                            <button type="submit" class="btn" th:text="${isEdit} ? 'Guardar' : 'Crear'"></button>
                         </div>
                     </form>
                 </div>

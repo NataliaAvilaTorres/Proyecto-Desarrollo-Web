@@ -4,22 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Veterinario Dogin</title>
-    <!-- CSS personalizado para el panel veterinario -->
-    <link rel="stylesheet" href="/css/panel_veterinario.css" />
-    <!-- Iconos de FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <!-- Script para manejar la barra lateral -->
+    <title>Detalles del Propietario</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/propietario_details.css">
     <script src="/JavaScript/sidebar.js" defer></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
 <body>
-    <!-- Barra decorativa superior -->
     <img src="/images/barrasola.png" alt="Barra Decorativa" class="barra-decorativa" />
-    <!-- Footer decorativo -->
     <img src="/images/footer.png" alt="Footer Decorativo" class="footer-decorativa" />
 
-    <!-- Barra lateral de navegación -->
     <div class="sidebar close">
         <div class="logo">
             <img src="/images/doggin logos/DOGIN VARIACIONES DE COLOR-11.png" alt="Logo Dogin" class="logo-img" />
@@ -27,7 +23,6 @@
         </div>
 
         <ul class="nav-list">
-            <!-- Cada enlace ahora lleva a la ruta correcta del servidor -->
             <li>
                 <a href="/veterinario/panel">
                     <i class="fab fa-microsoft"></i>
@@ -77,48 +72,72 @@
                 </a>
             </li>
 
+
             <li>
                 <div class="profile-details">
                     <div class="profile-content">
                         <img src="/images/user.jpg" alt="Imagen del Usuario" />
                     </div>
+
                     <div class="name-job">
                         <div class="name" th:text="${primerNombre}">Nombre del Usuario</div>
                         <div class="job">Veterinario</div>
                     </div>
-                    <a href="#">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                    <a href="/logout"><i class="fas fa-right-to-bracket"></i></a>
                 </div>
             </li>
         </ul>
     </div>
 
-    <!-- Sección principal de contenido -->
     <div class="home-section">
         <div class="home-content">
             <i class="fas fa-bars"></i>
-            <span class="text">Menú</span>
+            <span class="text">Menu</span>
         </div>
 
-        <!-- Sección del panel principal -->
-        <section id="panel" class="content-section active">
-            <div class="welcome-block">
-                <p>Este panel es tu centro de operaciones, diseñado para que puedas trabajar de manera eficiente y
-                    concentrarte en lo más importante: el bienestar de nuestros pacientes. ¡Gracias por tu dedicación y
-                    compromiso con cada vida que cuidas!</p>
-            </div>
+        <!-- Sección de Panel -->
+        <section id="panel" class="content-section">
+            <h2>Panel</h2>
+            <p>Aquí va el contenido del panel principal...</p>
         </section>
 
-        <!-- Ícono decorativo -->
-        <img src="/images/Icono casita.png" alt="icono" class="iconoModificar" />
+        <!-- Sección de Historial -->
+        <section id="historial" class="content-section" style="display: none;">
+            <h2>Historial</h2>
+            <p>Aquí va el contenido del historial...</p>
+        </section>
 
-        <!-- Encabezado del panel -->
+        <!-- Sección de Mis Mascotas -->
+        <section id="mis-mascotas" class="content-section" style="display: none;">
+            <h2>Mis Mascotas</h2>
+            <p>Aquí va el contenido de mis mascotas...</p>
+        </section>
+
+        <img src="/images/lista.png" alt="icono" class="iconoLista" />
+
         <header id="header">
-            <h1 class="form-title">PANEL VETERINARIO</h1>
-            <img src="/images/veteyperro.png" alt="icono" class="Veteyperro" />
+            <h1 class="form-title">DETALLES DEL PROPIETARIO</h1>
         </header>
-    </div>
+
+        <main>
+            <div class="container">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Información del Propietario</h5>
+                        <p>Cédula: <span th:text="${propietario.cedula}"></span></p>
+                        <p>Nombre: <span th:text="${propietario.nombre}"></span></p>
+                        <p>Correo: <span th:text="${propietario.correo}"></span></p>
+                        <p>Celular: <span th:text="${propietario.celular}"></span></p>
+                    </div>
+                </div>
+
+                <!--AQUI VA LA INFO DE LA MASCOTA QUE TIENE EL PROPIETARIO-->
+
+                <a href="javascript:window.history.back();" class="btn-testimonios">Volver</a>
+            </div>
+        </main>
+
+        <script src="/JavaScript/script.js" defer></script>
 </body>
 
 </html>
