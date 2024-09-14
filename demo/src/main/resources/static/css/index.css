@@ -439,8 +439,8 @@ main h1 {
   padding-top: 2.5rem;
   padding-bottom: -1rem;
   padding-left: 4rem;
-  padding-right: 4rem;
-  width: 1300px;
+  padding-right: 12rem;
+  width: 500px;
   height: 350px;
   border-radius: 25px;
   box-shadow: 0 20px 30px -20px rgba(5, 5, 5, 0.24);
@@ -496,6 +496,8 @@ main h1 {
   margin-top: 1rem;
   color: rgb(252, 252, 252);
   font-size: 18px;
+  width: 200%; /* Ajusta el ancho al 100% del contenedor padre */
+  max-width: 900px; /* Puedes ajustar el valor para que se vea más amplio */
 }
 
 /* Estilos del carrusel */

@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -15,8 +14,6 @@ import com.example.demo.model.Propietario;
 import com.example.demo.service.PropietarioService;
 
 import jakarta.servlet.http.HttpSession;
-
-
 
 @Controller
 @RequestMapping("/propietario")
@@ -85,7 +82,8 @@ public class PropietarioController {
 
     @GetMapping("/misMascotas")
     public String mascotasPropietario(Model model, HttpSession session) {
-        Propietario propietario = (Propietario) session.getAttribute("propietario"); // Obtener el propietario de la sesión
+        Propietario propietario = (Propietario) session.getAttribute("propietario"); // Obtener el propietario de la
+                                                                                     // sesión
         if (propietario != null) {
             model.addAttribute("propietario", propietario); // Pasar la lista de mascotas al modelo
             return "mascotas_propietario"; // Retornar la vista con la lista de mascotas
@@ -93,5 +91,5 @@ public class PropietarioController {
             return "redirect:/login"; // Redirigir al login si no hay propietario en la sesión
         }
     }
-    
+
 }

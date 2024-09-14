@@ -46,7 +46,7 @@ public class LoginController {
         String correo = loginRequest.getCorreo();
         String contrasena = loginRequest.getContrasena();
         String role = loginRequest.getRole();
-    
+
         if ("veterinario".equals(role)) {
             boolean isAuthenticated = veterinarioService.validateLogin(correo, contrasena);
             if (isAuthenticated) {
@@ -59,10 +59,9 @@ public class LoginController {
                 return "redirect:/propietario/panel";
             }
         }
-    
+
         model.addAttribute("error", "Credenciales incorrectas.");
         return "login";
     }
-    
 
 }
