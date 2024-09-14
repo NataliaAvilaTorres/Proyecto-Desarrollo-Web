@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.Login;
+import com.example.demo.model.Propietario;
 import com.example.demo.service.PropietarioService;
 import com.example.demo.service.VeterinarioService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -39,29 +42,27 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute Login loginRequest, Model model) {
+    public String login(@ModelAttribute Login loginRequest, Model model, HttpSession session) {
         String correo = loginRequest.getCorreo();
         String contrasena = loginRequest.getContrasena();
         String role = loginRequest.getRole();
-
-        boolean isAuthenticated = false;
-
+    
         if ("veterinario".equals(role)) {
-            isAuthenticated = veterinarioService.validateLogin(correo, contrasena);
+            boolean isAuthenticated = veterinarioService.validateLogin(correo, contrasena);
             if (isAuthenticated) {
                 return "redirect:/veterinario/panel";
             }
         } else if ("dueno".equals(role)) {
-            isAuthenticated = propietarioService.validateLogin(correo, contrasena);
-            if (isAuthenticated) {
+            Propietario propietario = propietarioService.validateLoginAndGetPropietario(correo, contrasena);
+            if (propietario != null) {
+                session.setAttribute("propietario", propietario); // Guardar el propietario en sesión
                 return "redirect:/propietario/panel";
             }
         }
-
-        // Si no está autenticado, redirige a la página de inicio de sesión con un
-        // mensaje de error.
+    
         model.addAttribute("error", "Credenciales incorrectas.");
-        return "login"; // Redirige de nuevo a la página de inicio de sesión.
+        return "login";
     }
+    
 
 }

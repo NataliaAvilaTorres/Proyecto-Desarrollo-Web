@@ -113,7 +113,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="mascota : ${mascotas}">
+                        <tr th:each="mascota : ${propietario.mascotas}">
                             <td th:text="${mascota.id}"></td>
                             <td th:text="${mascota.nombre}"></td>
                             <td th:text="${mascota.raza}"></td>

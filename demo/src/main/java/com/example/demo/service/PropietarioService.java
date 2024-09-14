@@ -13,7 +13,10 @@ public interface PropietarioService {
     public void update(Propietario propietario);
     public void add(Propietario propietario);
     public Propietario findByCedula(String cedula);
+    public Propietario findByCorreo(String correo);
 
-    public boolean validateLogin(String correo, String contrasena);
+    public Propietario validateLoginAndGetPropietario(String correo, String contrasena);
+    
+
     
 }

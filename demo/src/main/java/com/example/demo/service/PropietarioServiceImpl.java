@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.Collection;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,9 +46,22 @@ public class PropietarioServiceImpl implements PropietarioService {
     }
 
     @Override
-    public boolean validateLogin(String correo, String contrasena) {
+    public Propietario validateLoginAndGetPropietario(String correo, String contrasena) {
+        // Busca el propietario por correo
         Propietario propietario = repo.findByCorreo(correo);
-        return propietario != null && propietario.getContrasena().equals(contrasena);
+        
+        // Valida si el propietario existe y la contraseña coincide
+        if (propietario != null && propietario.getContrasena().equals(contrasena)) {
+            return propietario; // Credenciales válidas, devuelve el propietario
+        }
+        
+        return null; // Credenciales incorrectas
     }
+
+    @Override
+    public Propietario findByCorreo(String correo) {
+        return repo.findByCorreo(correo);
+    }
+
     
 }
