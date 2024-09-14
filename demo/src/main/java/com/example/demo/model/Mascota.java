@@ -17,7 +17,7 @@ public class Mascota {
     private String nombre;
     private String raza;
     private int edad;
-    private float peso;
+    private double peso;
     private String enfermedad;
     private String fotoUrl;
     private String estado;
@@ -26,16 +26,16 @@ public class Mascota {
     @JoinColumn(name = "propietario_id")
     private Propietario propietario;
 
-    
+
     public Mascota() {
 
     }
 
-    public Mascota(String nombre, String raza, int edad, float peso, String enfermedad, String fotoUrl, String estado) {
+    public Mascota(String nombre, String raza, int edad, double peso2, String enfermedad, String fotoUrl, String estado) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
-        this.peso = peso;
+        this.peso = peso2;
         this.enfermedad = enfermedad;
         this.fotoUrl = fotoUrl;
         this.estado = estado;
@@ -73,11 +73,11 @@ public class Mascota {
         this.edad = edad;
     }
 
-    public float getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 

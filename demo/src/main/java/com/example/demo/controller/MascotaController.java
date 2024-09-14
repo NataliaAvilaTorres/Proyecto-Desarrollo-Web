@@ -27,7 +27,7 @@ public class MascotaController {
     // http://localhost:8090/veterinario/addMascota
     @GetMapping("/addMascota")
     public String mostrarFormularioPet(Model model) {
-        Mascota pet = new Mascota("", "", 0, 0, "", "", "");
+        Mascota pet = new Mascota("", "", 0, 0.0, "", "", "");
         model.addAttribute("mascota", pet);
         model.addAttribute("propietarios", propietarioService.findAll());
         return "pet_form";
@@ -40,7 +40,7 @@ public class MascotaController {
         mascotaService.add(mascota);
         return "redirect:/veterinario/panel"; 
     }
-    
+
     @GetMapping("/listMascotas")
     public String mostrarMascotas(Model model) {
 

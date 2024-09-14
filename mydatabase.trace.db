@@ -1,0 +1,4 @@
+2024-09-13 18:49:20.730953-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "FOTO_URL CHARACTER VARYING(255)": "'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.fundacion-affinity.org%2F... (305)"
+Value too long for column "FOTO_URL CHARACTER VARYING(255)": "'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.fundacion-affinity.org%2F... (305)"; SQL statement:
+insert into mascota (edad,enfermedad,estado,foto_url,nombre,peso,propietario_id,raza,id) values (?,?,?,?,?,?,?,?,?) [22001-224]
