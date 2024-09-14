@@ -456,7 +456,7 @@ body {
   top: 20%;
   left: 230px;
   width: 500px;
-  background-color: white;
+  background-color:#365486;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -470,15 +470,16 @@ body {
   /* Sombra más grande al hacer hover */
   transform: translateY(-10px);
   /* Hace que el bloque se eleve suavemente */
-  background-color: #f0f8ff;
+  background-color: #365486;
   /* Cambia ligeramente el color de fondo */
   transition: all 0.3s ease;
   /* Asegura que todos los efectos de hover se animen */
 }
 
 .welcome-block p {
+  font-family: cursive;
   font-size: 32px;
-  color: #0f1035;
+  color: #fafbff;
   line-height: 1.7;
   text-align: left;
 }
