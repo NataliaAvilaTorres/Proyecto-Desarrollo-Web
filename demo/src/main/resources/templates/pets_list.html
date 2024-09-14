@@ -10,6 +10,7 @@
 
     <script src="/JavaScript/datos.js" defer></script>
     <script src="/JavaScript/sidebar.js" defer></script>
+    <script src="/JavaScript/searchMascota.js" defer></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
@@ -122,6 +123,18 @@
             <h1 class="form-title">LISTA DE MASCOTAS</h1>
         </header>
 
+        <!-- Campo de búsqueda -->
+        <section class="buscar">
+            <div class="buscador-container">
+                <h1>BUSCADOR</h1>
+                <div class="buscador-input">
+                    <input type="text" id="searchInput" placeholder="Buscar mascota..."
+                        onkeyup="buscarMascotas()" />
+                    <span class="icon-search">&#128269;</span>
+                </div>
+            </div>
+        </section>
+
 
         <main class="table" id="customers_table">
             <section class="table__header">
@@ -129,18 +142,18 @@
 
             </section>
             <section class="table__body">
-                <table>
+                <table id="mascotasTable">
                     <thead>
                         <tr>
-                            <th> ID <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Nombre <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Raza <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Edad <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Enfermerdad <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Cédula Propietario <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Foto <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Estado <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Acciones <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> ID</th>
+                            <th> Nombre</th>
+                            <th> Raza</th>
+                            <th> Edad</th>
+                            <th> Enfermerdad</th>
+                            <th> Cédula Propietario</th>
+                            <th> Foto</th>
+                            <th> Estado</th>
+                            <th> Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

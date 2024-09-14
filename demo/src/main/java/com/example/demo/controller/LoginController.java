@@ -63,5 +63,4 @@ public class LoginController {
         model.addAttribute("error", "Credenciales incorrectas.");
         return "login";
     }
-
 }

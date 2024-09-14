@@ -1,67 +1,109 @@
 body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(to left top, #7FC7D9, #DCF2F1); /* Aplica el gradiente aquí */
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative; /* Añadir esta línea */
-    z-index: 1; /* Asegurar que el contenido del body tenga un mayor z-index */
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(to left top,
+      #7fc7d9,
+      #dcf2f1);
+  /* Aplica el gradiente aquí */
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* Añadir esta línea */
+  z-index: 1;
+  /* Asegurar que el contenido del body tenga un mayor z-index */
 }
 
 .form-title {
-    font-size: 50px;
-    font-weight: 900;
-    line-height: 112px;
-    text-align: right;
-    color: #0f1035;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    position: fixed; /* Cambia a 'fixed' para mantener el título en una posición fija */
-    top: 5px; /* Ajusta la posición vertical desde la parte superior de la ventana */
-    left: calc(80% - 300px); /* Ajusta la posición horizontal, en este caso para que quede a la derecha */
-    /* Puedes ajustar 'left' según tus necesidades */
-    z-index: 20; /* Asegura que el título esté por encima de otros elementos */
-  }
- /* Barra decorativa */
- .barra-decorativa {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: auto;
-    height: 88%;
-    background-color: transparent;
-    z-index: 0; /* Enviar la barra decorativa detrás del formulario */
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 112px;
+  text-align: right;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  /* Cambia a 'fixed' para mantener el título en una posición fija */
+  top: 5px;
+  /* Ajusta la posición vertical desde la parte superior de la ventana */
+  left: calc(80% - 300px);
+  /* Ajusta la posición horizontal, en este caso para que quede a la derecha */
+  /* Puedes ajustar 'left' según tus necesidades */
+  z-index: 20;
+  /* Asegura que el título esté por encima de otros elementos */
+}
+
+.form-title2 {
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 112px;
+  text-align: right;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  /* Cambia a 'fixed' para mantener el título en una posición fija */
+  top: 200px;
+  /* Ajusta la posición vertical desde la parte superior de la ventana */
+  left: calc(80% - 300px);
+  /* Ajusta la posición horizontal, en este caso para que quede a la derecha */
+  /* Puedes ajustar 'left' según tus necesidades */
+  z-index: 20;
+  /* Asegura que el título esté por encima de otros elementos */
+}
+
+/* Barra decorativa */
+.barra-decorativa {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
+  height: 88%;
+  background-color: transparent;
+  z-index: 0;
+  /* Enviar la barra decorativa detrás del formulario */
 }
 
 /* Footer decorativo */
 .footer-decorativa {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 2700px; 
-    height: 88%;
-    background-color: transparent;
-    z-index: 0; /* Enviar el footer detrás del formulario */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2700px;
+  height: 88%;
+  background-color: transparent;
+  z-index: 0;
+  /* Enviar el footer detrás del formulario */
 }
 
 .iconoModificar {
-    position: fixed; /* Posiciona la imagen de manera absoluta */
-    top: 30px; /* Ajusta según donde quieras que se muestre */
-    left: 1000px; /* Ajusta según donde quieras que se muestre */
-    z-index: 20; /* Asegura que la imagen esté por encima de la barra decorativa */
-    width:350px; /* Ajusta el tamaño según sea necesario */
-    height: auto; /* Mantén la proporción de la imagen */
+  position: fixed;
+  /* Posiciona la imagen de manera absoluta */
+  top: -80px;
+  /* Ajusta según donde quieras que se muestre */
+  left: 750px;
+  /* Ajusta según donde quieras que se muestre */
+  z-index: 20;
+  /* Asegura que la imagen esté por encima de la barra decorativa */
+  width: 700px;
+  /* Ajusta el tamaño según sea necesario */
+  height: auto;
+  /* Mantén la proporción de la imagen */
 }
 
-.Veteyperro{
-    position: absolute; /* Posiciona la imagen de manera absoluta */
-    top: 205px; /* Ajusta según donde quieras que se muestre */
-    left: 900px; /* Ajusta según donde quieras que se muestre */
-    z-index: 20; /* Asegura que la imagen esté por encima de la barra decorativa */
-    width: 860px; /* Ajusta el tamaño según sea necesario */
-    height: auto; /* Mantén la proporción de la imagen */
+.Veteyperro {
+  position: fixed;
+  /* Posiciona la imagen de manera absoluta */
+  top: 210px;
+  /* Ajusta según donde quieras que se muestre */
+  left: 800px;
+  /* Ajusta según donde quieras que se muestre */
+  z-index: 20;
+  /* Asegura que la imagen esté por encima de la barra decorativa */
+  width: 800px;
+  /* Ajusta el tamaño según sea necesario */
+  height: auto;
+  /* Mantén la proporción de la imagen */
 }
 
 /* Sidebar */
@@ -71,8 +113,9 @@ body {
   left: 0;
   height: 100%;
   width: 260px;
-  background-color: #0F1035;
-  z-index: 100; /* Asegura que el sidebar esté encima del contenido */
+  background-color: #0f1035;
+  z-index: 100;
+  /* Asegura que el sidebar esté encima del contenido */
   transition: all 0.5s ease;
 }
 
@@ -83,10 +126,10 @@ body {
 }
 
 .logo-name {
-    width: 130px;
-    height: 80px;
-    margin-left: 10px;
-    margin-top: 20px;
+  width: 130px;
+  height: 80px;
+  margin-left: 10px;
+  margin-top: 20px;
 }
 
 /* Cuando el sidebar está cerrado */
@@ -228,7 +271,7 @@ body {
 }
 
 .sidebar .nav-list li .sub-menu a {
-  color: #DCF2F1;
+  color: #dcf2f1;
   font-size: 15px;
   padding: 5px 0;
   white-space: nowrap;
@@ -322,10 +365,11 @@ body {
   width: calc(100% - 260px);
   left: 260px;
   transition: all 0.5s ease;
-  z-index: 10; /* Asegura que el contenido de la sección principal esté encima de las imágenes decorativas */
+  z-index: 10;
+  /* Asegura que el contenido de la sección principal esté encima de las imágenes decorativas */
 }
 
-.sidebar.close ~ .home-section {
+.sidebar.close~.home-section {
   left: 78px;
   width: calc(100% - 78px);
 }
@@ -357,11 +401,13 @@ body {
 
 /* Estilos para manejar la visibilidad de las secciones */
 .content-section {
-  display: none; /* Oculto por defecto */
+  display: none;
+  /* Oculto por defecto */
 }
 
 .content-section.active {
-  display: block; /* Se muestra cuando tiene la clase 'active' */
+  display: block;
+  /* Se muestra cuando tiene la clase 'active' */
 }
 
 @media (max-width: 400px) {
@@ -383,7 +429,7 @@ body {
     z-index: 100;
   }
 
-  .sidebar.close ~ .home-section {
+  .sidebar.close~.home-section {
     width: 100%;
     left: 0;
   }
@@ -391,35 +437,43 @@ body {
 
 /* Icono del menú */
 .home-section .home-content i.fa-bars {
-  position: relative; /* Asegura que puedas usar transformaciones */
-  transition: transform 0.5s ease; /* Suaviza el movimiento */
+  position: relative;
+  /* Asegura que puedas usar transformaciones */
+  transition: transform 0.5s ease;
+  /* Suaviza el movimiento */
   margin-left: -10px;
 }
 
 /* Cuando el sidebar está abierto */
-.sidebar.close ~ .home-section .home-content i.fa-bars {
-  transform: translateX(20px); /* Ajusta este valor según sea necesario */
+.sidebar.close~.home-section .home-content i.fa-bars {
+  transform: translateX(20px);
+  /* Ajusta este valor según sea necesario */
 }
 
 /* Bloque blanco con texto a la izquierda */
 .welcome-block {
-  position: absolute;
+  position: fixed;
   top: 20%;
-  left: 100px;
+  left: 230px;
   width: 500px;
   background-color: white;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    transition: all 0.3s ease; /* Suaviza cualquier cambio, incluido el hover */
+  z-index: 10;
+  transition: all 0.3s ease;
+  /* Suaviza cualquier cambio, incluido el hover */
 }
 
 .welcome-block:hover {
-  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3); /* Sombra más grande al hacer hover */
-  transform: translateY(-10px); /* Hace que el bloque se eleve suavemente */
-  background-color: #f0f8ff; /* Cambia ligeramente el color de fondo */
-  transition: all 0.3s ease; /* Asegura que todos los efectos de hover se animen */
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3);
+  /* Sombra más grande al hacer hover */
+  transform: translateY(-10px);
+  /* Hace que el bloque se eleve suavemente */
+  background-color: #f0f8ff;
+  /* Cambia ligeramente el color de fondo */
+  transition: all 0.3s ease;
+  /* Asegura que todos los efectos de hover se animen */
 }
 
 .welcome-block p {

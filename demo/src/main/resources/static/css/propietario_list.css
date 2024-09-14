@@ -75,7 +75,7 @@ main.table {
     border-radius: .6rem;
     overflow: auto;
     overflow: overlay;
-    margin-top: 100px;
+    margin-top: 125px;
 }
 
 
@@ -679,4 +679,56 @@ tbody td.active {
 .sidebar.close~.home-section .home-content i.fa-bars {
     transform: translateX(20px);
     /* Ajusta este valor según sea necesario */
+}
+
+/* Estilos para el campo de búsqueda */
+.buscar {
+    position: fixed; /* Hace que el buscador quede fijo en la pantalla */
+    top: 60px; /* Ajusta la distancia desde la parte superior */
+    right: 1080px; /* Ajusta la distancia desde la parte derecha */
+    z-index: 1000; /* Asegura que el buscador esté encima de otros elementos */
+    text-align: center;
+}
+
+.buscador-container {
+    display: inline-block;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(199, 52, 52, 0.1);
+    background: #0F1035;
+    padding: 10px;
+}
+
+.buscador-container h1 {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.buscador-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.buscador-input input {
+    width: 100%;
+    padding: 10px 150px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #555;
+    outline: none;
+}
+
+.buscador-input input:focus {
+    border-color: #007bff;
+}
+
+.icon-search {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #888;
 }

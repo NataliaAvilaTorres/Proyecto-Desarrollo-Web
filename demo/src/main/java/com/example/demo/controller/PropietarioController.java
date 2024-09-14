@@ -82,13 +82,13 @@ public class PropietarioController {
 
     @GetMapping("/misMascotas")
     public String mascotasPropietario(Model model, HttpSession session) {
-        Propietario propietario = (Propietario) session.getAttribute("propietario"); // Obtener el propietario de la
-                                                                                     // sesión
+        Propietario propietario = (Propietario) session.getAttribute("propietario");
+                                                                                     
         if (propietario != null) {
-            model.addAttribute("propietario", propietario); // Pasar la lista de mascotas al modelo
-            return "mascotas_propietario"; // Retornar la vista con la lista de mascotas
+            model.addAttribute("propietario", propietario);
+            return "mascotas_propietario";
         } else {
-            return "redirect:/login"; // Redirigir al login si no hay propietario en la sesión
+            return "redirect:/login";
         }
     }
 

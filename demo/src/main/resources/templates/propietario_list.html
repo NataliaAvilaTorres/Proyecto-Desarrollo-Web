@@ -7,6 +7,7 @@
 
     <script src="/JavaScript/sidebar.js" defer></script>
     <script src="/JavaScript/datos.js" defer></script>
+    <script src="/JavaScript/searchPropietario.js" defer></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
@@ -119,7 +120,16 @@
             <h1 class="form-title">LISTA DE PROPIETARIOS</h1>
         </header>
 
-
+        <!-- Campo de búsqueda -->
+        <section class="buscar">
+            <div class="buscador-container">
+                <h1>BUSCADOR</h1>
+                <div class="buscador-input">
+                    <input type="text" id="searchInput" placeholder="Buscar dueño..." onkeyup="buscarMascotas()" />
+                    <span class="icon-search">&#128269;</span>
+                </div>
+            </div>
+        </section>
 
 
         <main class="table" id="customers_table">
@@ -132,11 +142,11 @@
                 <table>
                     <thead>
                         <tr>
-                            <th> Cédula <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Nombre <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Correo <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Celular <span class="icon-arrow">&UpArrow;</span></th>
-                            <th> Acciones <span class="icon-arrow">&UpArrow;</span></th>
+                            <th> Cédula</th>
+                            <th> Nombre</th>
+                            <th> Correo</th>
+                            <th> Celular</th>
+                            <th> Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,9 +159,12 @@
 
                             <!--BOTONES DE ACCIONES-->
                             <td>
-                                <a th:href="@{/propietario/find/{id}(id=${propietario.id})}" class="btn-detalles">Ver Detalles</a>
-                                <a th:href="@{/propietario/update/{id}(id=${propietario.id})}" class="btn-editar">Editar</a>
-                                <a th:href="@{/propietario/delete/{id}(id=${propietario.id})}" class="btn-eliminar">Eliminar</a>
+                                <a th:href="@{/propietario/find/{id}(id=${propietario.id})}" class="btn-detalles">Ver
+                                    Detalles</a>
+                                <a th:href="@{/propietario/update/{id}(id=${propietario.id})}"
+                                    class="btn-editar">Editar</a>
+                                <a th:href="@{/propietario/delete/{id}(id=${propietario.id})}"
+                                    class="btn-eliminar">Eliminar</a>
                             </td>
 
                         </tr>
