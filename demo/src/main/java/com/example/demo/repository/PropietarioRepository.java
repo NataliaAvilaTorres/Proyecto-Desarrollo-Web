@@ -7,7 +7,6 @@ import com.example.demo.model.Propietario;
 
 @Repository
 public interface PropietarioRepository extends JpaRepository<Propietario, Long> {
-
     Propietario findByCedula(String cedula);
-    
+    Propietario findByCorreo(String correo);
 }

@@ -43,5 +43,11 @@ public class PropietarioServiceImpl implements PropietarioService {
     public Propietario findByCedula(String cedula) {
         return repo.findByCedula(cedula);
     }
+
+    @Override
+    public boolean validateLogin(String correo, String contrasena) {
+        Propietario propietario = repo.findByCorreo(correo);
+        return propietario != null && propietario.getContrasena().equals(contrasena);
+    }
     
 }

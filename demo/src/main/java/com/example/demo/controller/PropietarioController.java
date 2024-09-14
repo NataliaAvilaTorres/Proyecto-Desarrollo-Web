@@ -19,6 +19,11 @@ public class PropietarioController {
     @Autowired
     PropietarioService propietarioService;
 
+    @GetMapping("/panel")
+    public String panelPropietario() {
+        return "panel_propietario";
+    }
+
     //http://localhost:8090/propietario/addPropietario
     @GetMapping("/addPropietario")
     public String mostrarFormularioPet(Model model) {
