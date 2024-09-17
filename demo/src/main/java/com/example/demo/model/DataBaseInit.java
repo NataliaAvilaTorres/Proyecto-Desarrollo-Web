@@ -37,6 +37,24 @@ public class DataBaseInit implements ApplicationRunner {
                                 new Veterinario("100118791", "Vet. Pedro", "cirujano", 34, "12345", "pedro@p.com"));
                 veterinarioRepository
                                 .save(new Veterinario("100118792", "Vet. Ana", "cirujano", 46, "12345", "ana@p.com"));
+                veterinarioRepository.save(new Veterinario("100118793", "Vet. Luis", "dermatólogo", 25, "12345", "luis@p.com"));
+                veterinarioRepository.save(new Veterinario("100118794", "Vet. María", "dentista", 29, "12345", "maria@p.com"));
+                veterinarioRepository.save(new Veterinario("100118795", "Vet. Carlos", "cardiólogo", 18, "12345", "carlos@p.com"));
+                veterinarioRepository.save(new Veterinario("100118796", "Vet. Sofia", "oftalmóloga", 32, "12345", "sofia@p.com"));
+                veterinarioRepository.save(new Veterinario("100118797", "Vet. Pablo", "oncólogo", 40, "12345", "pablo@p.com"));
+                veterinarioRepository.save(new Veterinario("100118798", "Vet. Laura", "anestesióloga", 15, "12345", "laura@p.com"));
+                veterinarioRepository.save(new Veterinario("100118799", "Vet. Andrés", "cirujano", 22, "12345", "andres@p.com"));
+                veterinarioRepository.save(new Veterinario("100118800", "Vet. Natalia", "nefróloga", 27, "12345", "natalia@p.com"));
+                veterinarioRepository.save(new Veterinario("100118801", "Vet. Diego", "internista", 35, "12345", "diego@p.com"));
+                veterinarioRepository.save(new Veterinario("100118802", "Vet. Fernanda", "cardióloga", 48, "12345", "fernanda@p.com"));
+                veterinarioRepository.save(new Veterinario("100118803", "Vet. Jorge", "dermatólogo", 30, "12345", "jorge@p.com"));
+                veterinarioRepository.save(new Veterinario("100118804", "Vet. Claudia", "cirujana", 26, "12345", "claudia@p.com"));
+                veterinarioRepository.save(new Veterinario("100118805", "Vet. Mauricio", "neurólogo", 42, "12345", "mauricio@p.com"));
+                veterinarioRepository.save(new Veterinario("100118806", "Vet. Daniela", "oncóloga", 20, "12345", "daniela@p.com"));
+                veterinarioRepository.save(new Veterinario("100118807", "Vet. Rodrigo", "ortopedista", 37, "12345", "rodrigo@p.com"));
+                veterinarioRepository.save(new Veterinario("100118808", "Vet. Paula", "oftalmóloga", 28, "12345", "paula@p.com"));
+                veterinarioRepository.save(new Veterinario("100118809", "Vet. Francisco", "anestesiólogo", 31, "12345", "francisco@p.com"));
+                                
 
                 Random random = new Random();
 
