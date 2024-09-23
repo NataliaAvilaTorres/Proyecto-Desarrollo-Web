@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -10,7 +11,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.repository.MascotaRepository;
+import com.example.demo.repository.MedicamentoRepository;
 import com.example.demo.repository.PropietarioRepository;
+import com.example.demo.repository.TratamientoRepository;
 import com.example.demo.repository.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
@@ -27,6 +30,12 @@ public class DataBaseInit implements ApplicationRunner {
 
     @Autowired
     VeterinarioRepository veterinarioRepository;
+
+    @Autowired
+    TratamientoRepository tratamientoRepository;
+
+    @Autowired
+    MedicamentoRepository medicamentoRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -155,6 +164,34 @@ public class DataBaseInit implements ApplicationRunner {
                 mascota.setPropietario(propietario);
                 mascotaRepository.save(mascota);
             }
+        }
+
+        // Lista de nombres de medicamentos
+        List<Medicamento> medicamentos = Arrays.asList(
+                new Medicamento("Ibuprofeno", 5.0f, 10.0f, 100),
+                new Medicamento("Antiparasitario", 12.0f, 20.0f, 50),
+                new Medicamento("Antiinflamatorio", 8.0f, 15.0f, 200),
+                new Medicamento("Vacuna Rabia", 25.0f, 40.0f, 150));
+
+        // Guardar medicamentos en la base de datos
+        medicamentoRepository.saveAll(medicamentos);
+
+        // Crear 10 tratamientos aleatorios
+        List<Mascota> mascotas = mascotaRepository.findAll();
+        List<Veterinario> veterinarios = veterinarioRepository.findAll();
+
+        for (int i = 0; i < 10; i++) {
+            Mascota mascota = mascotas.get(random.nextInt(mascotas.size()));
+            Veterinario veterinario = veterinarios.get(random.nextInt(veterinarios.size()));
+            Medicamento medicamento = medicamentos.get(random.nextInt(medicamentos.size()));
+            Date fecha = new Date(System.currentTimeMillis() - random.nextInt(1000000000)); // Fecha aleatoria
+
+            Tratamiento tratamiento = new Tratamiento(fecha);
+            tratamiento.setMascota(mascota);
+            tratamiento.setVeterinario(veterinario);
+            tratamiento.setMedicamento(medicamento);
+
+            tratamientoRepository.save(tratamiento);
         }
     }
 }
