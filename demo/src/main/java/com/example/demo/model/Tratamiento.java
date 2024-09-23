@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import java.sql.Date;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,17 +17,16 @@ public class Tratamiento {
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(name = "id_mascota", nullable = false)
+    @JoinColumn(name = "id_mascota", nullable = false) // Cambiamos a usar el id de mascota
     private Mascota mascota;
 
     @ManyToOne
-    @JoinColumn(name = "cedula_veterinario", nullable = false)
+    @JoinColumn(name = "id_veterinario", nullable = false) // Cambiamos a usar el id de veterinario (cedula podría funcionar pero id es más estándar)
     private Veterinario veterinario;
 
     @ManyToOne
-    @JoinColumn(name = "nombre_medicamento", nullable = false)
+    @JoinColumn(name = "id_medicamento", nullable = false) // Cambiamos a usar el id de medicamento, no el nombre
     private Medicamento medicamento;
-
 
     public Tratamiento() {
     }
@@ -76,5 +74,4 @@ public class Tratamiento {
     public void setMedicamento(Medicamento medicamento) {
         this.medicamento = medicamento;
     }
-
 }

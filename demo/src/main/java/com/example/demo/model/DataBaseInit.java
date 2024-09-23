@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.PropietarioRepository;
 import com.example.demo.repository.VeterinarioRepository;
+import com.example.demo.repository.TratamientoRepository;
+import com.example.demo.repository.MedicamentoRepository;
+
 
 import jakarta.transaction.Transactional;
 
@@ -28,15 +32,20 @@ public class DataBaseInit implements ApplicationRunner {
         @Autowired
         VeterinarioRepository veterinarioRepository;
 
+        @Autowired
+        TratamientoRepository tratamientoRepository;
+
+        @Autowired
+        MedicamentoRepository medicamentoRepository;
+
+
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
 
-                veterinarioRepository
-                                .save(new Veterinario("100118790", "Vet. Juan", "cirujano", 12, "12345", "juan@p.com"));
-                veterinarioRepository.save(
-                                new Veterinario("100118791", "Vet. Pedro", "cirujano", 34, "12345", "pedro@p.com"));
-                veterinarioRepository
-                                .save(new Veterinario("100118792", "Vet. Ana", "cirujano", 46, "12345", "ana@p.com"));
+                VeterinarioRepository.save(new Veterinario("100118790", "Vet. Juan", "cirujano", 12, "12345", "juan@p.com"));
+                veterinarioRepository.save(new Veterinario("100118791", "Vet. Pedro", "cirujano", 34, "12345", "pedro@p.com"));
+                veterinarioRepository.save(new Veterinario("100118792", "Vet. Ana", "cirujano", 46, "12345", "ana@p.com"));
                 veterinarioRepository.save(new Veterinario("100118793", "Vet. Luis", "dermatólogo", 25, "12345", "luis@p.com"));
                 veterinarioRepository.save(new Veterinario("100118794", "Vet. María", "dentista", 29, "12345", "maria@p.com"));
                 veterinarioRepository.save(new Veterinario("100118795", "Vet. Carlos", "cardiólogo", 18, "12345", "carlos@p.com"));
@@ -106,40 +115,52 @@ public class DataBaseInit implements ApplicationRunner {
                                 "https://s2.ppllstatics.com/lasprovincias/www/multimedia/202112/04/media/cortadas/GF0RO0L1-kQJH-U1601666042762sF-1248x770@Las%20Provincias.jpg",
                                 "https://www.zooplus.es/magazine/wp-content/uploads/2022/01/Psicologia-felina.jpeg");
 
-                // Crear 50 propietarios
-                for (int i = 0; i < 50; i++) {
-                        String nombrePropietario = nombresPropietarios.get(i % nombresPropietarios.size());
-                        String correo = correosPropietarios.get(i);
-                        String cedula = "100128609" + i;
-                        String celular = "314371398" + i;
-                        Propietario propietario = propietarioRepository
-                                        .save(new Propietario(cedula, nombrePropietario, correo, celular, "1234"));
 
-                        // Asignar dos mascotas a cada propietario
-                        for (int j = 0; j < 2; j++) {
-                                String nombreMascota = nombresMascotas.get((i * 2 + j) % nombresMascotas.size());
-                                String tipo = tiposMascotas.get(j % tiposMascotas.size());
-                                String raza = tipo.equals("Perro")
-                                                ? razasPerros.get(random.nextInt(razasPerros.size()))
-                                                : razasGatos.get(random.nextInt(razasGatos.size()));
-                                int edad = 1 + random.nextInt(15); // Edad aleatoria entre 1 y 15 años
-                                double peso = 1 + (15 * random.nextDouble()); // Peso aleatorio entre 1 y 15 kg
-                                String enfermedad = enfermedades.get(random.nextInt(enfermedades.size()));
+                  // Crear medicamentos
+                List<String> nombresMedicamentos = Arrays.asList("Ivermectina", "Amoxicilina", "Meloxicam", "Metronidazol", "Carprofeno");
+                List<Float> preciosCompra = Arrays.asList(10.5f, 12.0f, 8.5f, 9.0f, 15.0f);
+                List<Float> preciosVenta = Arrays.asList(15.0f, 18.0f, 12.0f, 13.5f, 20.0f);
 
-                                // Seleccionar la foto dependiendo si es perro o gato
-                                String foto = tipo.equals("Perro")
-                                                ? fotosPerros.get(random.nextInt(fotosPerros.size()))
-                                                : fotosGatos.get(random.nextInt(fotosGatos.size()));
+                for (int i = 0; i < nombresMedicamentos.size(); i++) {
+                medicamentoRepository.save(new Medicamento(nombresMedicamentos.get(i), preciosCompra.get(i), preciosVenta.get(i), random.nextInt(50) + 1));
+                }                       
 
-                                String estado = random.nextBoolean() ? "Activo" : "Inactivo"; // Estado aleatorio
 
-                                // Crear la mascota con todos los campos
-                                Mascota mascota = new Mascota(nombreMascota, raza, edad, peso, enfermedad, foto,
-                                                estado);
-                                mascota.setPropietario(propietario);
-                                mascotaRepository.save(mascota);
-                        }
-                }
+                 // Crear propietarios, mascotas y tratamientos
+                for (int j = 0; j < 2; j++) {
+                String nombreMascota = nombresMascotas.get((i * 2 + j) % nombresMascotas.size());
+                String tipo = tiposMascotas.get(j % tiposMascotas.size());
+                String raza = tipo.equals("Perro")
+                                ? razasPerros.get(random.nextInt(razasPerros.size()))
+                                : razasGatos.get(random.nextInt(razasGatos.size()));
+                int edad = 1 + random.nextInt(15); // Edad aleatoria entre 1 y 15 años
+                double peso = 1 + (15 * random.nextDouble()); // Peso aleatorio entre 1 y 15 kg
+                String enfermedad = enfermedades.get(random.nextInt(enfermedades.size()));
+
+                // Seleccionar la foto dependiendo si es perro o gato
+                String foto = tipo.equals("Perro")
+                                ? fotosPerros.get(random.nextInt(fotosPerros.size()))
+                                : fotosGatos.get(random.nextInt(fotosGatos.size()));
+
+                String estado = random.nextBoolean() ? "Activo" : "Inactivo"; // Estado aleatorio
+
+                // Crear la mascota con todos los campos
+                Mascota mascota = new Mascota(nombreMascota, raza, edad, peso, enfermedad, foto, estado);
+                mascota.setPropietario(propietario);
+                mascotaRepository.save(mascota);
+
+                // Crear tratamientos aleatorios para las mascotas
+                Veterinario veterinario = veterinarioRepository.findById("10011879" + random.nextInt(10)).orElse(null);
+                Medicamento medicamento = medicamentoRepository.findById((long) (random.nextInt(5) + 1)).orElse(null);
+                Date fechaTratamiento = new Date(System.currentTimeMillis() - random.nextInt(1000000000)); // Fecha aleatoria
+
+                Tratamiento tratamiento = new Tratamiento(fechaTratamiento);
+                tratamiento.setMascota(mascota);
+                tratamiento.setVeterinario(veterinario);
+                tratamiento.setMedicamento(medicamento);
+
+                tratamientoRepository.save(tratamiento);
+            }
         }
-
+    }
 }

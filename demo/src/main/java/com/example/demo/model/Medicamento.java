@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,9 +23,7 @@ public class Medicamento {
     @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tratamiento> tratamientos;
 
-    public Medicamento() {
-
-    }
+    public Medicamento() {}
 
     public Medicamento(String nombre, float precioCompra, float precioVenta, int unidadesDisponibles) {
         this.nombre = nombre;
@@ -90,7 +87,4 @@ public class Medicamento {
     public void setTratamientos(List<Tratamiento> tratamientos) {
         this.tratamientos = tratamientos;
     }
-
-    
-
 }
