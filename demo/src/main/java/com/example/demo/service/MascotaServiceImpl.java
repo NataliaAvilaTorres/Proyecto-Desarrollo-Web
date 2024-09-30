@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
 import java.util.Collection;
+import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,27 +19,33 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public Mascota findById(Long id) {
-        return repo.findById(id).get();
+        Optional<Mascota> mascotaOpt = repo.findById(id);
+        return mascotaOpt.orElse(null);
     }
 
     @Override
-    public Collection<Mascota> findAll() {
-        return repo.findAll();
+    public List<Mascota> findAll() {
+        return new ArrayList<>(repo.findAll());
     }
 
     @Override
     public void deleteById(Long id) {
-        repo.deleteById(id);
+        if (repo.existsById(id)) {
+            repo.deleteById(id);
+        }
     }
 
     @Override
     public void update(Mascota mascota) {
-        repo.save(mascota);
+        if (mascota != null && mascota.getId() != null && repo.existsById(mascota.getId())) {
+            repo.save(mascota);
+        }
     }
 
     @Override
     public void add(Mascota mascota) {
-        repo.save(mascota);
+        if (mascota != null) {
+            repo.save(mascota);
+        }
     }
-    
 }

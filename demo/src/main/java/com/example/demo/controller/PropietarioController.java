@@ -1,95 +1,64 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.Propietario;
+import com.example.demo.model.Mascota;
 import com.example.demo.service.PropietarioService;
 
-import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import java.util.ArrayList; // Importación añadida
 
-@Controller
-@RequestMapping("/propietario")
+@RestController
+@RequestMapping("/api/propietarios")
+@CrossOrigin(origins = "*") // Allow cross-origin requests from any origin
 public class PropietarioController {
 
     @Autowired
-    PropietarioService propietarioService;
+    private PropietarioService propietarioService;
 
-    @GetMapping("/panel")
-    public String panelPropietario() {
-        return "panel_propietario";
+    // Get all propietarios
+    @GetMapping
+    public List<Propietario> getAllPropietarios() {
+        return new ArrayList<>(propietarioService.findAll());
     }
 
-    // http://localhost:8090/propietario/addPropietario
-    @GetMapping("/addPropietario")
-    public String mostrarFormularioPet(Model model) {
-        Propietario pro = new Propietario("", "", "", "", "");
-        model.addAttribute("propietario", pro);
-        return "propietario_form";
+    // Get a propietario by its ID
+    @GetMapping("/{id}")
+    public Propietario getPropietarioById(@PathVariable("id") Long id) {
+        return propietarioService.findById(id);
     }
 
-    @PostMapping("/agregarPropietario")
-    public String agregarMascota(@ModelAttribute("propietario") Propietario pro) {
-        propietarioService.add(pro);
-        return "redirect:/veterinario/panel"; // Toca cambiar esto
+    // Create a new propietario
+    @PostMapping
+    public Propietario createPropietario(@RequestBody Propietario propietario) {
+        propietarioService.add(propietario);
+        return propietario;
     }
 
-    // http://localhost:8090/propietario/listPropietarios
-    @GetMapping("/listPropietarios")
-    public String mostrarPropietarios(Model model) {
-
-        model.addAttribute("propietarios", propietarioService.findAll());
-        return "propietario_list";
-    }
-
-    @GetMapping("/update/{id}")
-    public String mostrarFormulario(@PathVariable("id") Long identificacion, Model model) {
-        model.addAttribute("propietario", propietarioService.findById(identificacion));
-        return "propietario_modificar";
-    }
-
-    @PostMapping("/update/{id}")
-    public String updatePropietario(@PathVariable("id") Long identificacion,
-            @ModelAttribute("propietario") Propietario propietario) {
-
+    // Update an existing propietario by its ID
+    @PutMapping("/{id}")
+    public Propietario updatePropietario(@PathVariable("id") Long id, @RequestBody Propietario propietario) {
+        propietario.setId(id);
         propietarioService.update(propietario);
-        return "redirect:/propietario/listPropietarios";
+        return propietario;
     }
 
-    @GetMapping("/find/{id}")
-    public String mostrarInfoPropietario(Model model, @PathVariable("id") Long identificacion) {
-        Propietario propietario = propietarioService.findById(identificacion);
+    // Delete a propietario by its ID
+    @DeleteMapping("/{id}")
+    public void deletePropietario(@PathVariable("id") Long id) {
+        propietarioService.deleteById(id);
+    }
+
+    // Get all mascotas belonging to a specific propietario
+    @GetMapping("/{id}/mascotas")
+    public List<Mascota> getMascotasByPropietario(@PathVariable("id") Long id) {
+        Propietario propietario = propietarioService.findById(id);
         if (propietario != null) {
-            model.addAttribute("propietario", propietario);
+            return propietario.getMascotas();
         } else {
-
-        }
-        return "propietario_details";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String borrarPropietario(@PathVariable("id") Long identificacion) {
-        propietarioService.deleteById(identificacion);
-        return "redirect:/propietario/listPropietarios";
-    }
-
-    @GetMapping("/misMascotas")
-    public String mascotasPropietario(Model model, HttpSession session) {
-        Propietario propietario = (Propietario) session.getAttribute("propietario");
-                                                                                     
-        if (propietario != null) {
-            model.addAttribute("propietario", propietario);
-            return "mascotas_propietario";
-        } else {
-            return "redirect:/login";
+            return null; // Optionally handle null case better, e.g., throw an exception
         }
     }
-
 }

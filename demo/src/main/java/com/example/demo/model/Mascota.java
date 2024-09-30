@@ -1,8 +1,10 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -11,9 +13,9 @@ import jakarta.persistence.ManyToOne;
 public class Mascota {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String nombre;
     private String raza;
     private int edad;
@@ -22,25 +24,26 @@ public class Mascota {
     private String fotoUrl;
     private String estado;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "propietario_id")
     private Propietario propietario;
 
+    // Constructor vacío
+    public Mascota() {}
 
-    public Mascota() {
-
-    }
-
-    public Mascota(String nombre, String raza, int edad, double peso2, String enfermedad, String fotoUrl, String estado) {
+    // Constructor completo
+    public Mascota(String nombre, String raza, int edad, double peso, String enfermedad, String fotoUrl, String estado) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
-        this.peso = peso2;
+        this.peso = peso;
         this.enfermedad = enfermedad;
         this.fotoUrl = fotoUrl;
         this.estado = estado;
     }
 
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -112,5 +115,4 @@ public class Mascota {
     public void setPropietario(Propietario propietario) {
         this.propietario = propietario;
     }
-
 }

@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import java.util.Collection;
-
+import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,27 +19,34 @@ public class PropietarioServiceImpl implements PropietarioService {
 
     @Override
     public Propietario findById(Long id) {
-        return repo.findById(id).get(); 
+        Optional<Propietario> propietarioOpt = repo.findById(id);
+        return propietarioOpt.orElse(null); 
     }
 
     @Override
-    public Collection<Propietario> findAll() {
-        return repo.findAll();
+    public List<Propietario> findAll() {
+        return new ArrayList<>(repo.findAll());
     }
 
     @Override
     public void deleteById(Long id) {
-        repo.deleteById(id);
+        if (repo.existsById(id)) {
+            repo.deleteById(id);
+        }
     }
 
     @Override
     public void update(Propietario propietario) {
-        repo.save(propietario);
+        if (propietario != null && propietario.getId() != null && repo.existsById(propietario.getId())) {
+            repo.save(propietario);
+        }
     }
 
     @Override
     public void add(Propietario propietario) {
-        repo.save(propietario);
+        if (propietario != null) {
+            repo.save(propietario);
+        }
     }
 
     @Override
@@ -47,21 +56,15 @@ public class PropietarioServiceImpl implements PropietarioService {
 
     @Override
     public Propietario validateLoginAndGetPropietario(String correo, String contrasena) {
-        // Busca el propietario por correo
         Propietario propietario = repo.findByCorreo(correo);
-        
-        // Valida si el propietario existe y la contraseña coincide
         if (propietario != null && propietario.getContrasena().equals(contrasena)) {
-            return propietario; // Credenciales válidas, devuelve el propietario
+            return propietario; 
         }
-        
-        return null; // Credenciales incorrectas
+        return null; 
     }
 
     @Override
     public Propietario findByCorreo(String correo) {
         return repo.findByCorreo(correo);
     }
-
-    
 }

@@ -14,5 +14,5 @@ public interface VeterinarioService {
     public void add(Veterinario veterinario);
 
     public boolean validateLogin(String correo, String contrasena);
-    
+    public Veterinario validateLoginAndGetVeterinario(String correo, String contrasena); // Añadir este método
 }

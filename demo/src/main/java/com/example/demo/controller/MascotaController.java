@@ -1,21 +1,19 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.Mascota;
 import com.example.demo.model.Propietario;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.PropietarioService;
 
-@Controller
-@RequestMapping("/pet")
+import java.util.List;
+import java.util.ArrayList; // Importación añadida
+
+@RestController
+@RequestMapping("/api/mascotas")
+@CrossOrigin(origins = "*") // Allow cross-origin requests from any origin
 public class MascotaController {
 
     @Autowired
@@ -24,58 +22,33 @@ public class MascotaController {
     @Autowired
     PropietarioService propietarioService;
 
-    // http://localhost:8090/veterinario/addMascota
-    @GetMapping("/addMascota")
-    public String mostrarFormularioPet(Model model) {
-        Mascota pet = new Mascota("", "", 0, 0.0, "", "", "");
-        model.addAttribute("mascota", pet);
-        model.addAttribute("propietarios", propietarioService.findAll());
-        return "pet_form";
+    @GetMapping("/")
+    public List<Mascota> getAllMascotas() {
+        return new ArrayList<>(mascotaService.findAll());
     }
 
-    @PostMapping("/agregarMascota")
-    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota) {
+    @GetMapping("/{id}")
+    public Mascota getMascotaById(@PathVariable("id") Long id) {
+        return mascotaService.findById(id);
+    }
+
+    @PostMapping("/")
+    public Mascota createMascota(@RequestBody Mascota mascota) {
         Propietario propietario = propietarioService.findByCedula(mascota.getPropietario().getCedula());
         mascota.setPropietario(propietario);
         mascotaService.add(mascota);
-        return "redirect:/veterinario/panel"; 
+        return mascota;
     }
 
-    @GetMapping("/listMascotas")
-    public String mostrarMascotas(Model model) {
-
-        model.addAttribute("mascotas", mascotaService.findAll());
-        return "pets_list";
-    }
-
-    @GetMapping("/update/{id}")
-    public String mostrarFormulario(@PathVariable("id") Long identificacion, Model model) {
-        model.addAttribute("mascota", mascotaService.findById(identificacion));
-        return "pet_modificar";
-    }
-
-    @PostMapping("/update/{id}")
-    public String updateMascpta(@PathVariable("id") Long identificacion, @ModelAttribute("mascota") Mascota mascota) {
-
+    @PutMapping("/{id}")
+    public Mascota updateMascota(@PathVariable("id") Long id, @RequestBody Mascota mascota) {
+        mascota.setId(id);
         mascotaService.update(mascota);
-        return "redirect:/veterinario/panel";
+        return mascota;
     }
 
-    @GetMapping("/find/{id}")
-    public String mostrarInfoMascota(Model model, @PathVariable("id") Long identificacion) {
-        Mascota mascota = mascotaService.findById(identificacion);
-        if (mascota != null) {
-            model.addAttribute("mascota", mascota);
-        } else {
-
-        }
-        return "pet_details";
+    @DeleteMapping("/{id}")
+    public void deleteMascota(@PathVariable("id") Long id) {
+        mascotaService.deleteById(id);
     }
-
-    @GetMapping("/delete/{id}")
-    public String borrarMascota(@PathVariable("id") Long identificacion) {
-        mascotaService.deleteById(identificacion);
-        return "redirect:/pet/listMascotas";
-    }
-
 }

@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
 import java.util.Collection;
+import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,27 +19,34 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public Veterinario findById(Long id) {
-        return repo.findById(id).get();
+        Optional<Veterinario> veterinarioOpt = repo.findById(id);
+        return veterinarioOpt.orElse(null);
     }
 
     @Override
-    public Collection<Veterinario> findAll() {
-        return repo.findAll();
+    public List<Veterinario> findAll() {
+        return new ArrayList<>(repo.findAll());
     }
 
     @Override
     public void deleteById(Long id) {
-        repo.deleteById(id);
+        if (repo.existsById(id)) {
+            repo.deleteById(id);
+        }
     }
 
     @Override
     public void update(Veterinario veterinario) {
-        repo.save(veterinario);
+        if (veterinario != null && veterinario.getId() != null && repo.existsById(veterinario.getId())) {
+            repo.save(veterinario);
+        }
     }
 
     @Override
     public void add(Veterinario veterinario) {
-        repo.save(veterinario);
+        if (veterinario != null) {
+            repo.save(veterinario);
+        }
     }
 
     @Override
@@ -44,5 +54,13 @@ public class VeterinarioServiceImpl implements VeterinarioService {
         Veterinario veterinario = repo.findByCorreo(correo);
         return veterinario != null && veterinario.getContrasena().equals(contrasena);
     }
-    
+
+    @Override
+    public Veterinario validateLoginAndGetVeterinario(String correo, String contrasena) {
+        Veterinario veterinario = repo.findByCorreo(correo);
+        if (veterinario != null && veterinario.getContrasena().equals(contrasena)) {
+            return veterinario;
+        }
+        return null;
+    }
 }
