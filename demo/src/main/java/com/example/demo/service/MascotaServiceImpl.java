@@ -12,6 +12,7 @@ import com.example.demo.model.Mascota;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.repository.MascotaRepository;
 import com.example.demo.repository.TratamientoRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MascotaServiceImpl implements MascotaService {
