@@ -9,13 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Mascota;
+import com.example.demo.model.Tratamiento;
 import com.example.demo.repository.MascotaRepository;
+import com.example.demo.repository.TratamientoRepository;
 
 @Service
 public class MascotaServiceImpl implements MascotaService {
 
     @Autowired
     MascotaRepository repo;
+
+    @Autowired
+    TratamientoRepository tratamientoRepository; // Inyectar el TratamientoRepository
 
     @Override
     public Mascota findById(Long id) {
@@ -29,8 +34,17 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
+    @Transactional // Agrega esta anotación para asegurar que la operación sea atómica
     public void deleteById(Long id) {
+        // Verificar si la mascota existe
         if (repo.existsById(id)) {
+            // Primero eliminar todos los tratamientos asociados a la mascota
+            List<Tratamiento> tratamientos = tratamientoRepository.findByMascotaId(id);
+            if (!tratamientos.isEmpty()) {
+                tratamientoRepository.deleteAll(tratamientos);
+            }
+            
+            // Luego eliminar la mascota
             repo.deleteById(id);
         }
     }

@@ -12,14 +12,13 @@ import java.util.ArrayList; // Importación añadida
 
 @RestController
 @RequestMapping("/api/propietarios")
-@CrossOrigin(origins = "*") // Allow cross-origin requests from any origin
 public class PropietarioController {
 
     @Autowired
     private PropietarioService propietarioService;
 
     // Get all propietarios
-    @GetMapping
+    @GetMapping("/")
     public List<Propietario> getAllPropietarios() {
         return new ArrayList<>(propietarioService.findAll());
     }

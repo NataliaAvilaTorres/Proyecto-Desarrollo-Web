@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.CascadeType;
+
 
 @Entity
 public class Tratamiento {
@@ -17,8 +19,9 @@ public class Tratamiento {
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(name = "id_mascota", nullable = false) // Cambiamos a usar el id de mascota
+    @JoinColumn(name = "id_mascota", nullable = false)
     private Mascota mascota;
+
 
     @ManyToOne
     @JoinColumn(name = "id_veterinario", nullable = false) // Cambiamos a usar el id de veterinario (cedula podría funcionar pero id es más estándar)

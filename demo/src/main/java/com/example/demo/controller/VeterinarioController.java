@@ -11,14 +11,13 @@ import java.util.ArrayList; // Importación añadida
 
 @RestController
 @RequestMapping("/api/veterinarios")
-@CrossOrigin(origins = "*") // Allow cross-origin requests from any origin
 public class VeterinarioController {
 
     @Autowired
     private VeterinarioService veterinarioService;
 
     // Get all veterinarios
-    @GetMapping
+    @GetMapping("/")
     public List<Veterinario> getAllVeterinarios() {
         return new ArrayList<>(veterinarioService.findAll());
     }

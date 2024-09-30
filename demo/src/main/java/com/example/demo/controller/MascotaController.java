@@ -13,7 +13,6 @@ import java.util.ArrayList; // Importación añadida
 
 @RestController
 @RequestMapping("/api/mascotas")
-@CrossOrigin(origins = "*") // Allow cross-origin requests from any origin
 public class MascotaController {
 
     @Autowired

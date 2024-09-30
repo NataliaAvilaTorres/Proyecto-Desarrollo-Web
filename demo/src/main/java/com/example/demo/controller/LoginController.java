@@ -11,7 +11,6 @@ import com.example.demo.service.VeterinarioService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*") // Allow cross-origin requests from any origin
 public class LoginController {
 
     @Autowired
