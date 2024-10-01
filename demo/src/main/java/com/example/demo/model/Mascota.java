@@ -8,6 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Mascota {
@@ -28,6 +31,9 @@ public class Mascota {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "propietario_id")
     private Propietario propietario;
+
+    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
     // Constructor vacío
     public Mascota() {}
