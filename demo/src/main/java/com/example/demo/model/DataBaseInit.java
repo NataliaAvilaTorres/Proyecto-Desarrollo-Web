@@ -200,6 +200,8 @@ public class DataBaseInit implements ApplicationRunner {
             tratamiento.setMascota(mascota);
             tratamiento.setVeterinario(veterinario);
             tratamiento.setMedicamento(medicamento);
+            System.out.println("Tratamiento generado: Mascota ID = " + mascota.getId() + ", Veterinario ID = " + veterinario.getId() + ", Medicamento = " + medicamento.getNombre());
+
 
             tratamientoRepository.save(tratamiento);
         }
