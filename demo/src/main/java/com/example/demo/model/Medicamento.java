@@ -4,6 +4,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -11,7 +12,7 @@ import jakarta.persistence.OneToMany;
 public class Medicamento {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
@@ -25,11 +26,12 @@ public class Medicamento {
 
     public Medicamento() {}
 
-    public Medicamento(String nombre, float precioCompra, float precioVenta, int unidadesDisponibles) {
+    public Medicamento(String nombre, float precioCompra, float precioVenta, int unidadesDisponibles, int unidadesVendidas) {
         this.nombre = nombre;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
         this.unidadesDisponibles = unidadesDisponibles;
+        this.unidadesVendidas = unidadesVendidas;
     }
 
     public Long getId() {
