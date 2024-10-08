@@ -33,8 +33,9 @@ public class Mascota {
     private Propietario propietario;
 
 
-    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tratamiento> tratamientos = new ArrayList<>();
+    @OneToMany(mappedBy = "mascota", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+    private List<Tratamiento> tratamientos;
+    
 
     // Constructor vacío
     public Mascota() {}
