@@ -29,7 +29,7 @@ public class VeterinarioController {
     }
 
     // Create a new veterinario
-    @PostMapping
+    @PostMapping("/")
     public Veterinario createVeterinario(@RequestBody Veterinario veterinario) {
         veterinarioService.add(veterinario);
         return veterinario;
