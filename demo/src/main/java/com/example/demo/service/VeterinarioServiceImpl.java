@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
+import com.example.demo.repository.TratamientoRepository;
 import com.example.demo.repository.VeterinarioRepository;
 
 @Service
@@ -15,6 +18,9 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Autowired
     VeterinarioRepository repo;
+
+    @Autowired
+    TratamientoRepository tratamientoRepo;
 
     @Override
     public Veterinario findById(Long id) {
@@ -28,9 +34,22 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
-        if (repo.existsById(id)) {
-            repo.deleteById(id);
+        Optional<Veterinario> veterinarioOpt = repo.findById(id);
+        
+        if (veterinarioOpt.isPresent()) {
+            Veterinario veterinario = veterinarioOpt.get();
+            
+            // Desasociar los tratamientos del veterinario: Para cada tratamiento, establecer la referencia al veterinario como null
+            List<Tratamiento> tratamientos = tratamientoRepo.findByVeterinarioId(id);
+            for (Tratamiento tratamiento : tratamientos) {
+                tratamiento.setVeterinario(null);
+                tratamientoRepo.save(tratamiento);
+            }
+            
+            // Eliminar el veterinario
+            repo.delete(veterinario);
         }
     }
 

@@ -86,7 +86,5 @@ public class Veterinario {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
-    
     
 }

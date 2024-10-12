@@ -7,4 +7,7 @@ import java.util.List;
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
     // Método para obtener todos los tratamientos asociados a una mascota por su ID
     List<Tratamiento> findByMascotaId(Long mascotaId);
+
+    // Método para obtener todos los tratamientos asociados a un veterinario por su ID
+    List<Tratamiento> findByVeterinarioId(Long veterinarioId);
 }
