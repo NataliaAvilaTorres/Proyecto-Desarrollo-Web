@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.time.LocalDate;
 import java.util.Optional;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +100,8 @@ public class AdministradorServiceImpl implements AdministradorService {
             kpis.put("gananciasTotales", gananciasTotales != null ? gananciasTotales : 0.0);
 
             // 6. Top 3 tratamientos con más unidades vendidas
-            List<Object[]> topTratamientos = tratamientoRepository.findTop3ByUnidadesVendidas();
+            Pageable top3 = PageRequest.of(0, 3);  // Página 0, 3 elementos por página
+            List<Object[]> topTratamientos = tratamientoRepository.findTop3ByUnidadesVendidas(top3);
             kpis.put("topTratamientos", topTratamientos);
 
         } catch (Exception e) {

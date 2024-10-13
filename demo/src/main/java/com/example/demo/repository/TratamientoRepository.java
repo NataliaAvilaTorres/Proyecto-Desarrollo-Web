@@ -6,6 +6,8 @@ import java.util.List;
 import java.time.LocalDate;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
     // Método para obtener todos los tratamientos asociados a una mascota por su ID
@@ -31,6 +33,10 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     Double sumGanancias();
 
     // Top 3 tratamientos con más unidades vendidas
-    @Query("SELECT t.medicamento.nombre, COUNT(t) FROM Tratamiento t GROUP BY t.medicamento.nombre ORDER BY COUNT(t) DESC")
-    List<Object[]> findTop3ByUnidadesVendidas();
+    @Query("SELECT t.medicamento.nombre, COUNT(t) AS unidades FROM Tratamiento t " +
+       "GROUP BY t.medicamento.nombre ORDER BY unidades DESC")
+      List<Object[]> findTop3ByUnidadesVendidas(Pageable pageable);
+
+
+
 }
