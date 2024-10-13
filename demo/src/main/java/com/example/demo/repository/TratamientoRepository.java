@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.PageRequest;
 
 public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> {
     // Método para obtener todos los tratamientos asociados a una mascota por su ID
