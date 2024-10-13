@@ -9,5 +9,8 @@ import com.example.demo.model.Veterinario;
 public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> {
 
     Veterinario findByCorreo(String correo);
+    // Contar veterinarios por estado activo/inactivo
+    //int countByActivo(boolean activo);
+    
  
 }

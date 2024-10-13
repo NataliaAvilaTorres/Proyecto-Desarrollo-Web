@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,6 +55,12 @@ public class AdministradorController {
     @DeleteMapping("/{id}")
     public void deleteAdministrador(@PathVariable("id") Long id) {
         administradorService.deleteById(id);
+    }
+
+    // Endpoint para obtener los KPIs del dashboard
+    @GetMapping("/dashboard")
+    public Map<String, Object> getDashboardKPIs() {
+        return administradorService.getDashboardKPIs();
     }
 
 }

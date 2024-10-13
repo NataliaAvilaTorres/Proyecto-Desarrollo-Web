@@ -1,20 +1,36 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.time.LocalDate;
 import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Administrador;
 import com.example.demo.repository.AdministradorRepository;
+import com.example.demo.repository.MascotaRepository;
+import com.example.demo.repository.TratamientoRepository;
+import com.example.demo.repository.VeterinarioRepository;
 
 @Service
 public class AdministradorServiceImpl implements AdministradorService {
 
     @Autowired
     AdministradorRepository repo;
+
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
+
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
+
+    @Autowired
+    private MascotaRepository mascotaRepository;
 
     @Override
     public Administrador findById(Long id) {
@@ -47,5 +63,49 @@ public class AdministradorServiceImpl implements AdministradorService {
             repo.save(administrador);
         }
     }
+
+    @Override
+    public Map<String, Object> getDashboardKPIs() {
+        Map<String, Object> kpis = new HashMap<>();
+        LocalDate oneMonthAgo = LocalDate.now().minusMonths(1);
+
+        try {
+            // 1. Total tratamientos del último mes
+            int totalTratamientos = tratamientoRepository.countByFechaAfter(oneMonthAgo);
+            kpis.put("totalTratamientos", totalTratamientos);
+
+            // 2. Tratamientos por medicamento
+            List<Object[]> tratamientosPorMedicamento = tratamientoRepository.countByMedicamentoAndFechaAfter(oneMonthAgo);
+            kpis.put("tratamientosPorMedicamento", tratamientosPorMedicamento);
+
+            // 3. Veterinarios activos/inactivos
+            //int veterinariosActivos = veterinarioRepository.countByActivo(true);
+            //int veterinariosInactivos = veterinarioRepository.countByActivo(false);
+            //kpis.put("veterinariosActivos", veterinariosActivos);
+            //kpis.put("veterinariosInactivos", veterinariosInactivos);
+
+            // 4. Mascotas totales y activas
+            long totalMascotas = mascotaRepository.count();
+            long mascotasActivas = mascotaRepository.countByEstado("Activo");  // Usamos el estado "Activo"
+            kpis.put("totalMascotas", totalMascotas);
+            kpis.put("mascotasActivas", mascotasActivas);
+
+            // 5. Ventas y ganancias
+            Double ventasTotales = tratamientoRepository.sumTotalVentas();
+            Double gananciasTotales = tratamientoRepository.sumGanancias();
+            kpis.put("ventasTotales", ventasTotales != null ? ventasTotales : 0.0);
+            kpis.put("gananciasTotales", gananciasTotales != null ? gananciasTotales : 0.0);
+
+            // 6. Top 3 tratamientos con más unidades vendidas
+            List<Object[]> topTratamientos = tratamientoRepository.findTop3ByUnidadesVendidas();
+            kpis.put("topTratamientos", topTratamientos);
+
+        } catch (Exception e) {
+            kpis.put("error", "Ocurrió un error al obtener los KPIs: " + e.getMessage());
+        }
+
+        return kpis;
+    }
+
 
 }
