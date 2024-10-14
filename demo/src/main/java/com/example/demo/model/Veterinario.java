@@ -17,18 +17,20 @@ public class Veterinario {
     private int numAtenciones;
     private String contrasena;
     private String correo;
+    private String estado;
 
     public Veterinario() {
 
     }
 
-    public Veterinario(String cedula, String nombre, String especialidad, int numAtenciones, String contrasena, String correo) {
+    public Veterinario(String cedula, String nombre, String especialidad, int numAtenciones, String contrasena, String correo, String estado) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.especialidad = especialidad;
         this.numAtenciones = numAtenciones;
         this.contrasena = contrasena;
         this.correo = correo;
+        this.estado = estado;
     }
 
     public Long getId() {
@@ -87,6 +89,12 @@ public class Veterinario {
         this.correo = correo;
     }
 
-    
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
     
 }

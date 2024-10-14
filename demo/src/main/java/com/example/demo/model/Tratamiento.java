@@ -18,16 +18,16 @@ public class Tratamiento {
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(name = "id_mascota", nullable = true) // Permitimos que sea null
+    @JoinColumn(name = "id_mascota", nullable = false)
     private Mascota mascota;
 
 
     @ManyToOne
-    @JoinColumn(name = "id_veterinario", nullable = false) // Cambiamos a usar el id de veterinario (cedula podría funcionar pero id es más estándar)
+    @JoinColumn(name = "id_veterinario", nullable = true)
     private Veterinario veterinario;
 
     @ManyToOne
-    @JoinColumn(name = "id_medicamento", nullable = false) // Cambiamos a usar el id de medicamento, no el nombre
+    @JoinColumn(name = "id_medicamento", nullable = false)
     private Medicamento medicamento;
 
     public Tratamiento() {

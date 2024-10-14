@@ -36,16 +36,19 @@ public class MascotaServiceImpl implements MascotaService {
     @Override
     @Transactional // Agrega esta anotación para asegurar que la operación sea atómica
     public void deleteById(Long id) {
-        // Verificar si la mascota existe
-        if (repo.existsById(id)) {
-            // Primero eliminar todos los tratamientos asociados a la mascota
+        Optional<Mascota> mascotaOpt = repo.findById(id);
+        if (mascotaOpt.isPresent()) {
+            Mascota mascota = mascotaOpt.get();
+            
+            // Desasociar los tratamientos de la mascota: Para cada tratamiento, establecemos la referencia a la mascota como null
             List<Tratamiento> tratamientos = tratamientoRepository.findByMascotaId(id);
-            if (!tratamientos.isEmpty()) {
-                tratamientoRepository.deleteAll(tratamientos);
+            for (Tratamiento tratamiento : tratamientos) {
+                tratamiento.setMascota(null);
+                tratamientoRepository.save(tratamiento);
             }
             
-            // Luego eliminar la mascota
-            repo.deleteById(id);
+            // Eliminar la mascota
+            repo.delete(mascota);
         }
     }
 
