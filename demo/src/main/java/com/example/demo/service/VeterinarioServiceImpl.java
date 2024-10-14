@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import java.util.Optional;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,5 +82,18 @@ public class VeterinarioServiceImpl implements VeterinarioService {
             return veterinario;
         }
         return null;
+    }
+
+    public Map<String, Object> getVeterinarioKPIs() {
+        Map<String, Object> kpis = new HashMap<>();
+        
+        // Contar veterinarios activos e inactivos
+        int veterinariosActivos = repo.countByEstado("Activo");
+        int veterinariosInactivos = repo.countByEstado("Inactivo");
+
+        kpis.put("veterinariosActivos", veterinariosActivos);
+        kpis.put("veterinariosInactivos", veterinariosInactivos);
+
+        return kpis;
     }
 }

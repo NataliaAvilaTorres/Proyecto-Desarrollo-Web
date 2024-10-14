@@ -82,10 +82,10 @@ public class AdministradorServiceImpl implements AdministradorService {
             kpis.put("tratamientosPorMedicamento", tratamientosPorMedicamento);
 
             // 3. Veterinarios activos/inactivos
-            //int veterinariosActivos = veterinarioRepository.countByActivo(true);
-            //int veterinariosInactivos = veterinarioRepository.countByActivo(false);
-            //kpis.put("veterinariosActivos", veterinariosActivos);
-            //kpis.put("veterinariosInactivos", veterinariosInactivos);
+            int veterinariosActivos = veterinarioRepository.countByEstado("Activo");
+            int veterinariosInactivos = veterinarioRepository.countByEstado("Inactivo");
+            kpis.put("veterinariosActivos", veterinariosActivos);
+            kpis.put("veterinariosInactivos", veterinariosInactivos);
 
             // 4. Mascotas totales y activas
             long totalMascotas = mascotaRepository.count();
