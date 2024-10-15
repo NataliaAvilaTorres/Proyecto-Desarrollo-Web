@@ -95,7 +95,6 @@ public class DataBaseInit implements ApplicationRunner {
 
                 Random random = new Random();
 
-                importarMedicamentosDesdeExcel(); // Llama al método para importar medicamentos
 
                 // Lista de nombres de propietarios y correos electrónicos
                 List<String> nombresPropietarios = Arrays.asList("Luis", "Pedro", "Ana", "Carlos", "María", "Jorge",
@@ -180,16 +179,35 @@ public class DataBaseInit implements ApplicationRunner {
                         }
                 }
 
-                // Lista de nombres de medicamentos con el nuevo campo unidadesVendidas
-                List<Medicamento> medicamentos = Arrays.asList(
-                                new Medicamento("Ibuprofeno", 5.0f, 10.0f, 100, 10), // Aquí agregamos las
-                                                                                     // unidadesVendidas
-                                new Medicamento("Antiparasitario", 12.0f, 20.0f, 50, 5),
-                                new Medicamento("Antiinflamatorio", 8.0f, 15.0f, 200, 30),
-                                new Medicamento("Vacuna Rabia", 25.0f, 40.0f, 150, 20));
+                List<Medicamento> medicamentos = new ArrayList<>();
 
-                // Guardar medicamentos en la base de datos
-                medicamentoRepository.saveAll(medicamentos);
+                try (InputStream fis = new ClassPathResource("MEDICAMENTOS_VETERINARIA.xlsx").getInputStream();
+                                Workbook workbook = new XSSFWorkbook(fis)) {
+                        Sheet sheet = workbook.getSheetAt(0); // Asumiendo que los datos están en la primera hoja
+
+                        for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) { // Inicia desde 1 para
+                                                                                                // saltar el encabezado
+                                Row row = sheet.getRow(rowIndex);
+                                if (row != null) {
+                                        String nombre = row.getCell(0).getStringCellValue();
+                                        float precioCompra = (float) row.getCell(1).getNumericCellValue();
+                                        float precioVenta = (float) row.getCell(2).getNumericCellValue();
+                                        int unidadesDisponibles = (int) row.getCell(3).getNumericCellValue();
+                                        int unidadesVendidas = (int) row.getCell(4).getNumericCellValue();
+
+                                        Medicamento medicamento = new Medicamento(nombre, precioCompra, precioVenta,
+                                                        unidadesDisponibles, unidadesVendidas);
+                                        medicamento.setUnidadesVendidas(unidadesVendidas); // Seteamos las unidades
+                                                                                           // vendidas
+                                        medicamentos.add(medicamento);
+                                }
+                        }
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+
+                medicamentoRepository.saveAll(medicamentos); // Guarda todos los medicamentos leídos
+
 
                 // Crear 10 tratamientos aleatorios
                 List<Mascota> mascotas = mascotaRepository.findAll();
@@ -222,37 +240,6 @@ public class DataBaseInit implements ApplicationRunner {
                 administradorRepository.save(new Administrador("1234567892", "Carlos Martínez",
                                 "carlos.admin@correo.com", "admin123"));
 
-        }
-
-        private void importarMedicamentosDesdeExcel() {
-                List<Medicamento> medicamentos = new ArrayList<>();
-
-                try (InputStream fis = new ClassPathResource("MEDICAMENTOS_VETERINARIA.xlsx").getInputStream();
-                                Workbook workbook = new XSSFWorkbook(fis)) {
-                        Sheet sheet = workbook.getSheetAt(0); // Asumiendo que los datos están en la primera hoja
-
-                        for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) { // Inicia desde 1 para
-                                                                                                // saltar el encabezado
-                                Row row = sheet.getRow(rowIndex);
-                                if (row != null) {
-                                        String nombre = row.getCell(0).getStringCellValue();
-                                        float precioCompra = (float) row.getCell(1).getNumericCellValue();
-                                        float precioVenta = (float) row.getCell(2).getNumericCellValue();
-                                        int unidadesDisponibles = (int) row.getCell(3).getNumericCellValue();
-                                        int unidadesVendidas = (int) row.getCell(4).getNumericCellValue();
-
-                                        Medicamento medicamento = new Medicamento(nombre, precioCompra, precioVenta,
-                                                        unidadesDisponibles, unidadesVendidas);
-                                        medicamento.setUnidadesVendidas(unidadesVendidas); // Seteamos las unidades
-                                                                                           // vendidas
-                                        medicamentos.add(medicamento);
-                                }
-                        }
-                } catch (IOException e) {
-                        e.printStackTrace();
-                }
-
-                medicamentoRepository.saveAll(medicamentos); // Guarda todos los medicamentos leídos
         }
 
 }

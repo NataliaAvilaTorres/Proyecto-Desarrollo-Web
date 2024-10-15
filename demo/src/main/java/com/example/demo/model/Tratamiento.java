@@ -27,7 +27,7 @@ public class Tratamiento {
     private Veterinario veterinario;
 
     @ManyToOne
-    @JoinColumn(name = "id_medicamento", nullable = false)
+    @JoinColumn(name = "id_medicamento", nullable = true)
     private Medicamento medicamento;
 
     public Tratamiento() {

@@ -21,7 +21,7 @@ public class Medicamento {
     private int unidadesDisponibles;
     private int unidadesVendidas;
 
-    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL, orphanRemoval = true) 
     private List<Tratamiento> tratamientos;
 
     public Medicamento() {}
