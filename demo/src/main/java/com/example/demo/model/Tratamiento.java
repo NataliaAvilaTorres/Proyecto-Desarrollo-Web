@@ -18,7 +18,7 @@ public class Tratamiento {
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(name = "id_mascota", nullable = true)
+    @JoinColumn(name = "id_mascota", nullable = false)
     private Mascota mascota;
 
 

@@ -33,7 +33,7 @@ public class Mascota {
     private Propietario propietario;
 
 
-    @OneToMany(mappedBy = "mascota")
+    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     // Constructor vacío
