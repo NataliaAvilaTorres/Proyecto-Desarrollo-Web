@@ -25,7 +25,6 @@ public class MedicamentoServiceImpl implements MedicamentoService {
     @Override
     public List<Medicamento> findAll() {
         return new ArrayList<>(repo.findAll());
-
     }
 
     @Override
@@ -36,16 +35,18 @@ public class MedicamentoServiceImpl implements MedicamentoService {
     }
 
     @Override
-    public void update(Medicamento medicamento) {
+    public Medicamento update(Medicamento medicamento) {
         if (medicamento != null && medicamento.getId() != null && repo.existsById(medicamento.getId())) {
-            repo.save(medicamento);
+            return repo.save(medicamento);
         }
+        return null;
     }
 
     @Override
-    public void add(Medicamento medicamento) {
+    public Medicamento add(Medicamento medicamento) {
         if (medicamento != null) {
-            repo.save(medicamento);
+            return repo.save(medicamento);
         }
+        return null;
     }
 }

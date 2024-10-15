@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.service.TratamientoService;
 
+
 @RestController
 @RequestMapping("/api/tratamientos")
 public class TratamientoController {

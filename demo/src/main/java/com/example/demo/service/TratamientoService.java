@@ -8,7 +8,7 @@ public interface TratamientoService {
     public Tratamiento findById(Long id);
     public Collection<Tratamiento> findAll();
     public void deleteById(Long id);
-    public void update(Tratamiento tratamiento);
-    public void add(Tratamiento tratamiento);
+    public Tratamiento update(Tratamiento tratamiento);
+    public Tratamiento add(Tratamiento tratamiento);
 
 }

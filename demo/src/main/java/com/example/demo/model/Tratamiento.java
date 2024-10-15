@@ -1,8 +1,8 @@
 package com.example.demo.model;
 
 import java.sql.Date;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 
 import jakarta.persistence.Entity;
@@ -10,13 +10,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 @Entity
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class, 
+  property = "id")
 public class Tratamiento {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Date fecha;
@@ -25,18 +29,15 @@ public class Tratamiento {
     @JoinColumn(name = "id_mascota", nullable = false)
     private Mascota mascota;
 
-
     @ManyToOne
     @JoinColumn(name = "id_veterinario", nullable = true)
     private Veterinario veterinario;
 
     @ManyToOne
     @JoinColumn(name = "id_medicamento", nullable = true)
-    @JsonManagedReference
     private Medicamento medicamento;
 
-    public Tratamiento() {
-    }
+    public Tratamiento() {}
 
     public Tratamiento(Date fecha) {
         this.fecha = fecha;
@@ -80,5 +81,11 @@ public class Tratamiento {
 
     public void setMedicamento(Medicamento medicamento) {
         this.medicamento = medicamento;
+    }
+
+    @Override
+    public String toString() {
+        return "Tratamiento{id=" + id + ", fecha=" + fecha + 
+               ", medicamento=" + medicamento + "}";
     }
 }
