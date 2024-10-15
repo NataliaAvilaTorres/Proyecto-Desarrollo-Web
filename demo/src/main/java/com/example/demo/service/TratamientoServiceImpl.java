@@ -35,18 +35,16 @@ public class TratamientoServiceImpl implements TratamientoService {
     }
 
     @Override
-    public Tratamiento update(Tratamiento tratamiento) {
+    public void update(Tratamiento tratamiento) {
         if (tratamiento != null && tratamiento.getId() != null && repo.existsById(tratamiento.getId())) {
-            return repo.save(tratamiento);
+            repo.save(tratamiento);
         }
-        return null;
     }
 
     @Override
-    public Tratamiento add(Tratamiento tratamiento) {
+    public void add(Tratamiento tratamiento) {
         if (tratamiento != null) {
-            return repo.save(tratamiento);
+            repo.save(tratamiento);
         }
-        return null;
     }
 }

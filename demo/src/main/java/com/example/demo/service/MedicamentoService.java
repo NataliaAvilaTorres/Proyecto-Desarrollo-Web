@@ -8,6 +8,6 @@ public interface MedicamentoService {
     public Medicamento findById(Long id);
     public Collection<Medicamento> findAll();
     public void deleteById(Long id);
-    public Medicamento update(Medicamento medicamento);
-    public Medicamento add(Medicamento medicamento);
+    public void update(Medicamento medicamento);
+    public void add(Medicamento medicamento);
 }
