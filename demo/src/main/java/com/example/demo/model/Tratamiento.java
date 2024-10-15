@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
