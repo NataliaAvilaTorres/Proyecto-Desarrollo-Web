@@ -11,6 +11,7 @@ import java.util.ArrayList; // Importación añadida
 
 @RestController
 @RequestMapping("/api/veterinarios")
+@CrossOrigin(origins = "http://localhost:4200")
 public class VeterinarioController {
 
     @Autowired

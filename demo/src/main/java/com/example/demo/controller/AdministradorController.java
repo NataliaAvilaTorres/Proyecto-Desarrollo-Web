@@ -19,6 +19,7 @@ import com.example.demo.service.AdministradorService;
 
 @RestController
 @RequestMapping("/api/administradores")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AdministradorController {
 
     @Autowired

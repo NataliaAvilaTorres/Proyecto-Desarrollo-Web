@@ -11,6 +11,7 @@ import com.example.demo.service.VeterinarioService;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LoginController {
 
     @Autowired

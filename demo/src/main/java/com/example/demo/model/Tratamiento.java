@@ -32,8 +32,8 @@ public class Tratamiento {
 
     @ManyToOne
     @JoinColumn(name = "id_medicamento", nullable = true)
-    @JsonManagedReference
-    private Medicamento medicamento;
+    private Medicamento medicamento;  // No se ignora porque solo queremos mostrar este medicamento
+
 
     public Tratamiento() {
     }

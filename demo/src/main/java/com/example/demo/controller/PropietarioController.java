@@ -12,6 +12,7 @@ import java.util.ArrayList; // Importación añadida
 
 @RestController
 @RequestMapping("/api/propietarios")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PropietarioController {
 
     @Autowired

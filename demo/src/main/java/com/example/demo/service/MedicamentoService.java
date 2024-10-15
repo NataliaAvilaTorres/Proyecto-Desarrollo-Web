@@ -1,13 +1,13 @@
 package com.example.demo.service;
 
-import java.util.Collection;
 import com.example.demo.model.Medicamento;
+import java.util.Collection;
 
 public interface MedicamentoService {
 
-    public Medicamento findById(Long id);
-    public Collection<Medicamento> findAll();
-    public void deleteById(Long id);
-    public void update(Medicamento medicamento);
-    public void add(Medicamento medicamento);
+    Medicamento findById(Long id);
+    Collection<Medicamento> findAll();
+    void deleteById(Long id);
+    Medicamento update(Long id, Medicamento medicamento);  // Aquí añadimos el ID
+    void add(Medicamento medicamento);
 }

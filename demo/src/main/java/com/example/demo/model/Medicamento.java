@@ -3,7 +3,7 @@ package com.example.demo.model;
 import java.util.List;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import jakarta.persistence.CascadeType;
@@ -26,8 +26,8 @@ public class Medicamento {
     private int unidadesDisponibles;
     private int unidadesVendidas;
 
-    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL, orphanRemoval = true) 
-    @JsonBackReference
+    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore  // Evita la serialización de la lista de tratamientos
     private List<Tratamiento> tratamientos;
 
     public Medicamento() {}

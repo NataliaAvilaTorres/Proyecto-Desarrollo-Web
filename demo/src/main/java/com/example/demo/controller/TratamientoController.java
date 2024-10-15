@@ -11,6 +11,7 @@ import com.example.demo.service.TratamientoService;
 
 @RestController
 @RequestMapping("/api/tratamientos")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TratamientoController {
 
     @Autowired

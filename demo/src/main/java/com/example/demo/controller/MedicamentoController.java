@@ -11,6 +11,7 @@ import com.example.demo.service.MedicamentoService;
 
 @RestController
 @RequestMapping("/api/medicamentos")
+@CrossOrigin(origins = "http://localhost:4200")
 public class MedicamentoController {
 
     @Autowired
@@ -38,10 +39,9 @@ public class MedicamentoController {
     // Update an existing medicamento by its ID
     @PutMapping("/{id}")
     public Medicamento updateMedicamento(@PathVariable("id") Long id, @RequestBody Medicamento medicamento) {
-        medicamento.setId(id);
-        medicamentoService.update(medicamento);
-        return medicamento;
+        return medicamentoService.update(id, medicamento);
     }
+
 
     // Delete a medicamento by its ID
     @DeleteMapping("/{id}")
