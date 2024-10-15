@@ -3,6 +3,8 @@ package com.example.demo.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,7 +27,7 @@ public class Medicamento {
     private int unidadesVendidas;
 
     @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL, orphanRemoval = true) 
-    @JsonManagedReference
+    @JsonBackReference
     private List<Tratamiento> tratamientos;
 
     public Medicamento() {}

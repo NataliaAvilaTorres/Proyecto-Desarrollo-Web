@@ -3,6 +3,8 @@ package com.example.demo.model;
 import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +33,7 @@ public class Tratamiento {
 
     @ManyToOne
     @JoinColumn(name = "id_medicamento", nullable = true)
-    @JsonBackReference
+    @JsonManagedReference
     private Medicamento medicamento;
 
     public Tratamiento() {
