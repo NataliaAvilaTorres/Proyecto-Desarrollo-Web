@@ -24,12 +24,16 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     List<Object[]> countByMedicamentoAndFechaAfter(@Param("fecha") LocalDate fecha);
 
     // Suma total de las ventas (precio de venta de medicamentos)
-    @Query("SELECT SUM(t.medicamento.precioVenta) FROM Tratamiento t")
+    @Query("SELECT SUM(t.medicamento.precioVenta * t.medicamento.unidadesVendidas) FROM Tratamiento t")
     Double sumTotalVentas();
 
-    // Suma total de las ganancias (precio venta - precio compra)
-    @Query("SELECT SUM(t.medicamento.precioVenta - t.medicamento.precioCompra) FROM Tratamiento t")
+
+    // Suma total de las ganancias (precio venta - precio compra) por unidades vendidas
+    @Query("SELECT SUM((t.medicamento.precioVenta - t.medicamento.precioCompra) * t.medicamento.unidadesVendidas) FROM Tratamiento t")
     Double sumGanancias();
+
+
+
 
     // Top 3 tratamientos con más unidades vendidas
     @Query("SELECT t.medicamento.nombre, COUNT(t) AS unidades FROM Tratamiento t " +

@@ -190,8 +190,8 @@ public class DataBaseInit implements ApplicationRunner {
                                 Row row = sheet.getRow(rowIndex);
                                 if (row != null) {
                                         String nombre = row.getCell(0).getStringCellValue();
-                                        float precioCompra = (float) row.getCell(1).getNumericCellValue();
-                                        float precioVenta = (float) row.getCell(2).getNumericCellValue();
+                                        float precioVenta = (float) row.getCell(1).getNumericCellValue();
+                                        float precioCompra = (float) row.getCell(2).getNumericCellValue();
                                         int unidadesDisponibles = (int) row.getCell(3).getNumericCellValue();
                                         int unidadesVendidas = (int) row.getCell(4).getNumericCellValue();
 
@@ -216,7 +216,20 @@ public class DataBaseInit implements ApplicationRunner {
                 for (int i = 0; i < 10; i++) {
                         Mascota mascota = mascotas.get(random.nextInt(mascotas.size()));
                         Veterinario veterinario = veterinarios.get(random.nextInt(veterinarios.size()));
-                        Medicamento medicamento = medicamentos.get(random.nextInt(medicamentos.size()));
+                        // Seleccionar un medicamento con unidades disponibles
+                        Medicamento medicamento = null;
+                        while (medicamento == null) {
+                                Medicamento candidato = medicamentos.get(random.nextInt(medicamentos.size()));
+                                if (candidato.getUnidadesDisponibles() > 0) {  // Verificar disponibilidad
+                                    medicamento = candidato;
+                                }
+                        }
+
+                        // Actualizar unidades disponibles y vendidas
+                        medicamento.setUnidadesDisponibles(medicamento.getUnidadesDisponibles() - 1);
+                        medicamento.setUnidadesVendidas(medicamento.getUnidadesVendidas() + 1);
+                        medicamentoRepository.save(medicamento);  // Guardar cambios en el medicamento
+
                         Date fecha = new Date(System.currentTimeMillis() - random.nextInt(1000000000)); // Fecha
                                                                                                         // aleatoria
 
