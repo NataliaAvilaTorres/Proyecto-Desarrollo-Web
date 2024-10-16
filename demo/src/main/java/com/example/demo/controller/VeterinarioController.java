@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.Veterinario;
 import com.example.demo.service.VeterinarioService;
+import com.example.demo.model.Tratamiento;
+import com.example.demo.service.TratamientoService;
+import com.example.demo.model.Mascota;
+import java.util.stream.Collectors;
 
 import java.util.List;
 import java.util.ArrayList; // Importación añadida
@@ -16,6 +20,9 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioService veterinarioService;
+    @Autowired
+    private TratamientoService tratamientoService;
+
 
     // Get all veterinarios
     @GetMapping("/")

@@ -47,4 +47,8 @@ public class TratamientoServiceImpl implements TratamientoService {
             repo.save(tratamiento);
         }
     }
+    @Override
+    public List<Tratamiento> findByVeterinarioId(Long veterinarioId) {
+        return repo.findByVeterinarioId(veterinarioId);
+    }
 }

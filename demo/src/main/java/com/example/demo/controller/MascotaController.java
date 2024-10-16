@@ -7,6 +7,8 @@ import com.example.demo.model.Mascota;
 import com.example.demo.model.Propietario;
 import com.example.demo.service.MascotaService;
 import com.example.demo.service.PropietarioService;
+import com.example.demo.model.Tratamiento;
+
 
 import java.util.List;
 import java.util.ArrayList; // Importación añadida

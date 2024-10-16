@@ -11,6 +11,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.FetchType;
+
 
 @Entity
 public class Mascota {
@@ -122,4 +124,8 @@ public class Mascota {
     public void setPropietario(Propietario propietario) {
         this.propietario = propietario;
     }
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
 }
