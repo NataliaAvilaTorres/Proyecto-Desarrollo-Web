@@ -51,4 +51,15 @@ public class MascotaController {
     public void deleteMascota(@PathVariable("id") Long id) {
         mascotaService.deleteById(id);
     }
+
+    @GetMapping("/{id}/historial")
+    public List<Tratamiento> getHistorialMedico(@PathVariable("id") Long id) {
+        Mascota mascota = mascotaService.findById(id);
+        if (mascota != null) {
+            return mascota.getTratamientos();  // Devuelve los tratamientos
+        } else {
+            return null;  // Manejar el caso de null de mejor manera si es necesario
+        }
+    }
+
 }

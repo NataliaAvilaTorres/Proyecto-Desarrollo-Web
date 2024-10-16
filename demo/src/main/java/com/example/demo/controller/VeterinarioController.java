@@ -29,6 +29,18 @@ public class VeterinarioController {
         return veterinarioService.findById(id);
     }
 
+    @GetMapping("/{id}/mascotas-tratadas")
+    public List<Mascota> getMascotasTratadasPorVeterinario(@PathVariable("id") Long id) {
+        List<Tratamiento> tratamientos = tratamientoService.findByVeterinarioId(id);
+        List<Mascota> mascotasTratadas = tratamientos.stream()
+            .map(Tratamiento::getMascota)
+            .distinct()  // Elimina duplicados
+            .collect(Collectors.toList());
+
+        return mascotasTratadas;
+    }
+
+
     // Create a new veterinario
     @PostMapping("/")
     public Veterinario createVeterinario(@RequestBody Veterinario veterinario) {
