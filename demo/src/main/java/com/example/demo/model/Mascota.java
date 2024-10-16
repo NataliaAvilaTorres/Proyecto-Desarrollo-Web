@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,10 +33,12 @@ public class Mascota {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "propietario_id")
-    @JsonBackReference
+
+    @JsonIgnore
     private Propietario propietario;
 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
@@ -124,8 +128,13 @@ public class Mascota {
     public void setPropietario(Propietario propietario) {
         this.propietario = propietario;
     }
+
     public List<Tratamiento> getTratamientos() {
         return tratamientos;
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
     }
 
 }
