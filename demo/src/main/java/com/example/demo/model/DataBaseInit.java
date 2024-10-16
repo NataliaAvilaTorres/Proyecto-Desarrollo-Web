@@ -52,45 +52,45 @@ public class DataBaseInit implements ApplicationRunner {
 
                 //VETERINARIOS
                 
-                veterinarioRepository.save(new Veterinario("100118790", "Vet. Juan", "cirujano", 12, "12345",
+                veterinarioRepository.save(new Veterinario("100118790", "Vet. Juan", "cirujano","12345",
                                 "juan@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118791", "Vet. Pedro", "cirujano", 34, "12345",
+                veterinarioRepository.save(new Veterinario("100118791", "Vet. Pedro", "cirujano","12345",
                                 "pedro@p.com", "Inactivo"));
-                veterinarioRepository.save(new Veterinario("100118792", "Vet. Ana", "cirujano", 46, "12345",
+                veterinarioRepository.save(new Veterinario("100118792", "Vet. Ana", "cirujano", "12345",
                                 "ana@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118793", "Vet. Maria", "dermatóloga", 28, "12345",
+                veterinarioRepository.save(new Veterinario("100118793", "Vet. Maria", "dermatóloga", "12345",
                                 "maria@p.com", "Inactivo"));
-                veterinarioRepository.save(new Veterinario("100118794", "Vet. Carlos", "dentista", 39, "12345",
+                veterinarioRepository.save(new Veterinario("100118794", "Vet. Carlos", "dentista", "12345",
                                 "carlos@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118795", "Vet. Sofia", "oftalmóloga", 25, "12345",
+                veterinarioRepository.save(new Veterinario("100118795", "Vet. Sofia", "oftalmóloga", "12345",
                                 "sofia@p.com", "Inactivo"));
-                veterinarioRepository.save(new Veterinario("100118796", "Vet. Luis", "pediatra", 50, "12345",
+                veterinarioRepository.save(new Veterinario("100118796", "Vet. Luis", "pediatra", "12345",
                                 "luis@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118797", "Vet. Camila", "cirujana", 32, "12345",
+                veterinarioRepository.save(new Veterinario("100118797", "Vet. Camila", "cirujana", "12345",
                                 "camila@p.com", "Inactivo"));
-                veterinarioRepository.save(new Veterinario("100118798", "Vet. Andrés", "neurocirujano", 45, "12345",
+                veterinarioRepository.save(new Veterinario("100118798", "Vet. Andrés", "neurocirujano", "12345",
                                 "andres@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118799", "Vet. Gabriela", "cirujana", 30, "12345",
+                veterinarioRepository.save(new Veterinario("100118799", "Vet. Gabriela", "cirujana", "12345",
                                 "gabriela@p.com", "Inactivo"));
-                veterinarioRepository.save(new Veterinario("100118800", "Vet. David", "cardiólogo", 52, "12345",
+                veterinarioRepository.save(new Veterinario("100118800", "Vet. David", "cardiólogo", "12345",
                                 "david@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118801", "Vet. Laura", "dermatóloga", 29, "12345",
+                veterinarioRepository.save(new Veterinario("100118801", "Vet. Laura", "dermatóloga", "12345",
                                 "laura@p.com", "Inactivo"));
-                veterinarioRepository.save(new Veterinario("100118802", "Vet. Javier", "oncólogo", 47, "12345",
+                veterinarioRepository.save(new Veterinario("100118802", "Vet. Javier", "oncólogo",  "12345",
                                 "javier@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118803", "Vet. Carolina", "pediatra", 33, "12345",
+                veterinarioRepository.save(new Veterinario("100118803", "Vet. Carolina", "pediatra",  "12345",
                                 "carolina@p.com", "Inactivo"));
-                veterinarioRepository.save(new Veterinario("100118804", "Vet. Ricardo", "cirujano", 41, "12345",
+                veterinarioRepository.save(new Veterinario("100118804", "Vet. Ricardo", "cirujano", "12345",
                                 "ricardo@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118805", "Vet. Daniela", "dentista", 27, "12345",
+                veterinarioRepository.save(new Veterinario("100118805", "Vet. Daniela", "dentista", "12345",
                                 "daniela@p.com", "Inactivo"));
-                veterinarioRepository.save(new Veterinario("100118806", "Vet. Mauricio", "neurocirujano", 36, "12345",
+                veterinarioRepository.save(new Veterinario("100118806", "Vet. Mauricio", "neurocirujano",  "12345",
                                 "mauricio@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118807", "Vet. Valeria", "oftalmóloga", 31, "12345",
+                veterinarioRepository.save(new Veterinario("100118807", "Vet. Valeria", "oftalmóloga","12345",
                                 "valeria@p.com", "Inactivo"));
-                veterinarioRepository.save(new Veterinario("100118808", "Vet. Alejandro", "cardiólogo", 44, "12345",
+                veterinarioRepository.save(new Veterinario("100118808", "Vet. Alejandro", "cardiólogo","12345",
                                 "alejandro@p.com", "Activo"));
-                veterinarioRepository.save(new Veterinario("100118809", "Vet. Patricia", "dermatóloga", 38, "12345",
+                veterinarioRepository.save(new Veterinario("100118809", "Vet. Patricia", "dermatóloga", "12345",
                                 "patricia@p.com", "Inactivo"));
 
                 Random random = new Random();

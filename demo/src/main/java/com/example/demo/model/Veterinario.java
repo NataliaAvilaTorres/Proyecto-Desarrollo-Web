@@ -14,7 +14,6 @@ public class Veterinario {
     private String cedula;
     private String nombre;
     private String especialidad;
-    private int numAtenciones;
     private String contrasena;
     private String correo;
     private String estado;
@@ -23,11 +22,10 @@ public class Veterinario {
 
     }
 
-    public Veterinario(String cedula, String nombre, String especialidad, int numAtenciones, String contrasena, String correo, String estado) {
+    public Veterinario(String cedula, String nombre, String especialidad, String contrasena, String correo, String estado) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.especialidad = especialidad;
-        this.numAtenciones = numAtenciones;
         this.contrasena = contrasena;
         this.correo = correo;
         this.estado = estado;
@@ -63,14 +61,6 @@ public class Veterinario {
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
-    }
-
-    public int getNumAtenciones() {
-        return numAtenciones;
-    }
-
-    public void setNumAtenciones(int numAtenciones) {
-        this.numAtenciones = numAtenciones;
     }
 
     public String getContrasena() {
