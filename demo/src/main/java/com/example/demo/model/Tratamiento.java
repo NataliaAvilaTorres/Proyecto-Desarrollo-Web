@@ -2,8 +2,6 @@ package com.example.demo.model;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +20,7 @@ public class Tratamiento {
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(name = "id_mascota", nullable = false)
+    @JoinColumn(name = "id_mascota", nullable = true)
     private Mascota mascota;
 
 
