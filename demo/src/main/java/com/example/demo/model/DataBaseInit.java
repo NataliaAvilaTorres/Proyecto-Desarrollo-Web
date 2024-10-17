@@ -233,7 +233,7 @@ public class DataBaseInit implements ApplicationRunner {
                         Date fecha = new Date(System.currentTimeMillis() - random.nextInt(1000000000)); // Fecha
                                                                                                         // aleatoria
 
-                        Tratamiento tratamiento = new Tratamiento(fecha);
+                        Tratamiento tratamiento = new Tratamiento(fecha, 1);
                         tratamiento.setMascota(mascota);
                         tratamiento.setVeterinario(veterinario);
                         tratamiento.setMedicamento(medicamento);

@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -27,8 +27,9 @@ public class Medicamento {
     private int unidadesVendidas;
 
     @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore  // Evita la serialización de la lista de tratamientos
+    @JsonIgnoreProperties("medicamento")  // Ignora la referencia a medicamento en Tratamiento
     private List<Tratamiento> tratamientos;
+
 
     public Medicamento() {}
 

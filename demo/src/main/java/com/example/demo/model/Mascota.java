@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -33,14 +33,13 @@ public class Mascota {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "propietario_id")
-
-    @JsonIgnore
+    @JsonIgnoreProperties("mascotas")  // Evita la recursión infinita ignorando la lista de mascotas de Propietario
     private Propietario propietario;
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("mascota")  // Ignora la referencia a mascota en Tratamiento
     private List<Tratamiento> tratamientos = new ArrayList<>();
+
 
     // Constructor vacío
     public Mascota() {}

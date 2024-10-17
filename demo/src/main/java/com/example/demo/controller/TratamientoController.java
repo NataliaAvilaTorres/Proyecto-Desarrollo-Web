@@ -50,4 +50,10 @@ public class TratamientoController {
         tratamientoService.deleteById(id);
     }
 
+    // Endpoint para obtener los tratamientos por veterinario
+    @GetMapping("/veterinario/{veterinarioId}")
+    public List<Tratamiento> getTratamientosByVeterinario(@PathVariable("veterinarioId") Long veterinarioId) {
+        return tratamientoService.findByVeterinarioId(veterinarioId);
+    }
+
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -27,8 +28,8 @@ public class Propietario {
     private String celular;
     private String contrasena;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("propietario")  // Evita la recursión infinita ignorando el propietario en Mascota
     private List<Mascota> mascotas = new ArrayList<>();
 
     // Constructor vacío
