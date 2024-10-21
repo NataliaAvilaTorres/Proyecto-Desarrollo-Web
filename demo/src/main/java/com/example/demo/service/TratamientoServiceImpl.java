@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,4 +52,28 @@ public class TratamientoServiceImpl implements TratamientoService {
     public List<Tratamiento> findByVeterinarioId(Long veterinarioId) {
         return repo.findByVeterinarioId(veterinarioId);
     }
+
+    // Implementación de las consultas adicionales
+
+    @Override
+    public int countByFechaAfter(LocalDate date) {
+        return repo.countByFechaAfter(date);
+    }
+
+    @Override
+    public List<Object[]> countByMedicamentoAndFechaAfter(LocalDate fecha) {
+        return repo.countByMedicamentoAndFechaAfter(fecha);
+    }
+
+    @Override
+    public List<Tratamiento> findByMascotaId(Long mascotaId) {
+        return repo.findByMascotaId(mascotaId);
+
+    }
+
+    @Override
+    public List<Tratamiento> findByCantidadGreaterThan(Float cantidad) {
+        return repo.findByCantidadGreaterThan(cantidad);
+    }
+
 }

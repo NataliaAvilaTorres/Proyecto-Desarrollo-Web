@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -164,6 +165,7 @@ public class TratamientoServiceTestNaive {
     // 6. Prueba findByVeterinarioId
     @Test
     public void TratamientoService_findByVeterinarioId_TratamientoList() {
+
         // Arrange
         Veterinario veterinario = veterinarioService.findAll().get(0); // Veterinario creado en init()
         Long veterinarioId = veterinario.getId();
@@ -173,8 +175,104 @@ public class TratamientoServiceTestNaive {
 
         // Assert
         assertThat(tratamientos).isNotNull();
-        assertThat(tratamientos.size()).isEqualTo(2); // Deberían haber dos tratamientos creados en init() para este veterinario
-                                                      
+        assertThat(tratamientos.size()).isEqualTo(2); // Deberían haber dos tratamientos creados en init() para este
+                                                      // veterinario
+
     }
 
+    // 7. Prueba countByFechaAfter
+    @Test
+    public void TratamientoService_countByFechaAfter_TratamientoCount() {
+
+        // Arrange
+        LocalDate fechaReferencia = LocalDate.of(2024, 10, 14); // Fecha anterior a las fechas en los tratamientos
+
+        // Act
+        int count = tratamientoService.countByFechaAfter(fechaReferencia);
+
+        // Assert
+        assertThat(count).isEqualTo(2); // Hay 2 tratamientos después del 14 de octubre de 2024
+    }
+
+    // 8. Prueba countByMedicamentoAndFechaAfter
+    @Test
+    public void TratamientoService_countByMedicamentoAndFechaAfter_TratamientoList() {
+        
+        // Arrange
+        LocalDate fecha = LocalDate.of(2024, 10, 15); // Establecer la fecha límite
+        Medicamento medicamento2 = new Medicamento("Antibiótico", 100.0f, 200.0f, 20, 10);
+        medicamentoService.add(medicamento2);
+
+        Mascota mascota = mascotaService.findAll().get(0); // Reutilizamos la mascota creada en init()
+        Veterinario veterinario = veterinarioService.findAll().get(0); // Reutilizamos el veterinario creado en init()
+
+        // Crear tratamientos adicionales después de la fecha límite
+        Tratamiento tratamiento3 = new Tratamiento(Date.valueOf("2024-10-17"), 4.0f);
+        tratamiento3.setMascota(mascota);
+        tratamiento3.setVeterinario(veterinario);
+        tratamiento3.setMedicamento(medicamento2); // Usar el segundo medicamento
+
+        Tratamiento tratamiento4 = new Tratamiento(Date.valueOf("2024-10-18"), 2.0f);
+        tratamiento4.setMascota(mascota);
+        tratamiento4.setVeterinario(veterinario);
+        tratamiento4.setMedicamento(medicamento2);
+
+        tratamientoService.add(tratamiento3);
+        tratamientoService.add(tratamiento4);
+
+        // Act
+        List<Object[]> resultado = tratamientoService.countByMedicamentoAndFechaAfter(fecha);
+
+        // Assert
+        assertThat(resultado).isNotNull();
+        assertThat(resultado.size()).isEqualTo(2); // Debe haber 2 tipos de medicamentos
+
+        // Verificar el medicamento 1
+        Object[] medicamento1Result = resultado.get(0);
+        assertThat(medicamento1Result[0]).isEqualTo("Antibiótico");
+        assertThat((Long) medicamento1Result[1]).isEqualTo(2L); // Dos tratamientos
+
+        // Verificar el medicamento 2
+        Object[] medicamento2Result = resultado.get(1);
+        assertThat(medicamento2Result[0]).isEqualTo("Corticoide");
+        assertThat((Long) medicamento2Result[1]).isEqualTo(2L); // Dos tratamientos
+    }
+
+    // 9. Prueba findByMascotaId
+    @Test
+    public void TratamientoService_findByMascotaId_TratamientoList() {
+
+        // Arrange
+        Mascota mascota = mascotaService.findAll().get(0); // Usamos la mascota creada en init()
+        Long mascotaId = mascota.getId(); // Obtenemos el ID de la mascota
+
+        // Act
+        List<Tratamiento> tratamientos = tratamientoService.findByMascotaId(mascotaId);
+
+        // Assert
+        assertThat(tratamientos).isNotNull();
+        assertThat(tratamientos.size()).isEqualTo(2); // Deberían ser 2 tratamientos para esta mascota
+        assertThat(tratamientos.get(0).getMascota().getId()).isEqualTo(mascotaId); // Verificamos que la mascota es la
+                                                                                   // correcta
+        assertThat(tratamientos.get(1).getMascota().getId()).isEqualTo(mascotaId); // Verificamos que la mascota es la
+                                                                                   // correcta
+    }
+
+    // 10. Prueba findByCantidadGreaterThan
+    @Test
+    public void TratamientoService_findByCantidadGreaterThan_TratamientoList() {
+
+        // Arrange
+        Float cantidadUmbral = 2.0f; // Establecemos un umbral de cantidad
+
+        // Act
+        List<Tratamiento> tratamientos = tratamientoService.findByCantidadGreaterThan(cantidadUmbral);
+
+        // Assert
+        assertThat(tratamientos).isNotNull();
+        assertThat(tratamientos.size()).isEqualTo(1); // Debería devolver solo 1 tratamiento (3.0f)
+
+        // Verificamos que el tratamiento devuelto es el correcto
+        assertThat(tratamientos.get(0).getCantidad()).isGreaterThan(cantidadUmbral);
+    }
 }
