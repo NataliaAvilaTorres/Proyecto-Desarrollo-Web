@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import com.example.demo.model.Veterinario;
@@ -8,7 +8,7 @@ import com.example.demo.model.Veterinario;
 public interface VeterinarioService {
 
     public Veterinario findById(Long id);
-    public Collection<Veterinario> findAll();
+    public List<Veterinario> findAll();
 
     public void deleteById(Long id);
     public void update(Veterinario veterinario);
