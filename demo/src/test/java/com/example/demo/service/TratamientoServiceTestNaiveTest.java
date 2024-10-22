@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,10 @@ import com.example.demo.model.Medicamento;
 import com.example.demo.model.Tratamiento;
 import com.example.demo.model.Veterinario;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @ActiveProfiles("test")
-public class TratamientoServiceTestNaive {
+public class TratamientoServiceTestNaiveTest {
 
     @Autowired
     private TratamientoService tratamientoService;

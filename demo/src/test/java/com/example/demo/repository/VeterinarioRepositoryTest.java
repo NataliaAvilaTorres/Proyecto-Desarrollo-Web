@@ -18,9 +18,6 @@ public class VeterinarioRepositoryTest {
 
     @Autowired
     private VeterinarioRepository veterinarioRepository;
-
-
-
      @Test
     public void VeterinarioRepositoryTest_save_Veterinario(){
 
@@ -34,7 +31,6 @@ public class VeterinarioRepositoryTest {
 
     }
 
-
     @Test
     public void VeterinarioReporitoryTest_FindAll_NotEmptyList(){
 
@@ -45,7 +41,6 @@ public class VeterinarioRepositoryTest {
                                 "juan@p.com", "Activo");
         
         
-
         veterinarioRepository.save(veterinario);
         veterinarioRepository.save(veterinario2);
         List<Veterinario> veterinarios = veterinarioRepository.findAll();
@@ -64,7 +59,6 @@ public class VeterinarioRepositoryTest {
 
         Optional<Veterinario> veterinario =  veterinarioRepository.findById(index);
 
-        
         Assertions.assertThat(veterinario).isEmpty();
 
     }
