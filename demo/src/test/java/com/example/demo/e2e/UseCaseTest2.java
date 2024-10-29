@@ -40,10 +40,13 @@ public class UseCaseTest2 {
     public void init() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--disable-cache");
+        chromeOptions.addArguments("--disk-cache-size=0");
+        chromeOptions.addArguments("--disable-application-cache");
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--disable-extensions");
         this.driver = new ChromeDriver(chromeOptions);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @AfterEach
@@ -113,12 +116,18 @@ public class UseCaseTest2 {
         Select selectMedicamento = new Select(medicamentoSelectElement);
         wait.until(driver -> selectMedicamento.getOptions().size() > 1);
 
-        // Seleccionar la primera mascota y el medicamento "AEROFAR"
+        // Select the second mascota option
         selectMascota.selectByIndex(1);
-        selectedMascotaNombre = selectMascota.getOptions().get(1).getText();
-        selectedMascotaId = selectMascota.getOptions().get(1).getAttribute("value").split(":")[0].trim(); // Asegura el formato correcto del ID
+        WebElement selectedMascotaOption = selectMascota.getOptions().get(1);
+        System.out.println("Selected Mascota Option: " + selectedMascotaOption.getText());
+        selectedMascotaNombre = selectedMascotaOption.getText().split("-")[1].trim(); // Ajustar de acuerdo al formato del texto
+        System.out.println("Nombre de la mascota seleccionada: " + selectedMascotaNombre);
 
-       
+
+        // Extract ID from Value attribute
+        String[] parts = selectedMascotaOption.getText().split("[() -]+");
+        selectedMascotaId = parts[2].trim();
+        System.out.println("ID de la mascota seleccionada: " + selectedMascotaId);      
         boolean aerofarFound = false;
         for (int i = 1; i < selectMedicamento.getOptions().size(); i++) {
             if (selectMedicamento.getOptions().get(i).getText().contains("AEROFAR")) {
@@ -137,7 +146,7 @@ public class UseCaseTest2 {
         unidadesInput.sendKeys("1");
 
         WebElement fechaInput = driver.findElement(By.id("fecha"));
-        String fechaTratamiento = "05-02-2024";
+        String fechaTratamiento = "15/03/2024";
         fechaInput.sendKeys(fechaTratamiento);
 
         // Enviar formulario
@@ -149,10 +158,18 @@ public class UseCaseTest2 {
         assertEquals("Tratamiento creado correctamente", alert.getText());
         alert.accept();
 
+        System.out.println("Selected Mascota ID: " + selectedMascotaId);
+        System.out.println("Selected Medicamento: " + selectedMedicamentoNombre);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Increase to observe any delays
+        String formattedFechaTratamiento = "15/03/2024";  // Assuming this format matches the table
+
+
         // Verificar que el tratamiento se muestra en la lista de tratamientos
         WebElement tratamientoTable = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("tratamientosTable")));
+        System.out.println("Table Content: " + tratamientoTable.getText());
+
         WebElement tratamientoRow = wait.until(ExpectedConditions.visibilityOf(
-            tratamientoTable.findElement(By.xpath(".//tr[td[contains(text(),'" + selectedMascotaId + "')] and td[text()='" + fechaTratamiento + "']]"))
+            tratamientoTable.findElement(By.xpath(".//tr[td[contains(text(),'" + selectedMascotaId + "')] and td[contains(text(), '" + formattedFechaTratamiento + "')]]"))
         ));
         assertEquals(selectedMascotaId, tratamientoRow.findElement(By.xpath(".//td[1]")).getText());
         assertEquals(fechaTratamiento, tratamientoRow.findElement(By.xpath(".//td[4]")).getText());
@@ -172,9 +189,9 @@ public class UseCaseTest2 {
         assertEquals(selectedMascotaId, mascotaID.getText());
 
         // Confirmar historial de tratamientos en detalles de la mascota
-        WebElement tratamientoHistorialTable = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[contains(@class, 'table-container')]")));
+        WebElement tratamientoHistorialTable = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table")));
         WebElement tratamientoHistorialRow = wait.until(ExpectedConditions.visibilityOf(
-            tratamientoHistorialTable.findElement(By.xpath(".//tr[td[contains(text(), '" + selectedMedicamentoNombre + "') and following-sibling::td[contains(text(), '" + fechaTratamiento + "')]]"))
+            tratamientoHistorialTable.findElement(By.xpath(".//tr[td[contains(text(), 'AEROFAR')] and td[contains(text(), '15/03/2024')] and td[contains(text(), 'Vet. Pedro')]]"))
         ));
 
         // Validar detalles específicos del tratamiento en historial
@@ -195,6 +212,8 @@ public class UseCaseTest2 {
         // Confirmar redirección al panel de administrador
         wait.until(ExpectedConditions.urlToBe(BASE_URL + "/adminPanel"));
         assertEquals(BASE_URL + "/adminPanel", driver.getCurrentUrl());
+        System.out.println("Admin Panel URL: " + driver.getCurrentUrl());
+        driver.navigate().refresh();
 
         // Validar incremento en cantidad de tratamientos para "AEROFAR" y ganancias
         medicamentoCountElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='medicamentos-table']//td[text()='AEROFAR']/following-sibling::td")));

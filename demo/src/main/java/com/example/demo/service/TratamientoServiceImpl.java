@@ -44,10 +44,20 @@ public class TratamientoServiceImpl implements TratamientoService {
 
     @Override
     public void add(Tratamiento tratamiento) {
-        if (tratamiento != null) {
-            repo.save(tratamiento);
-        }
+    if (tratamiento != null) {
+        // Print the details of the treatment to the console
+        System.out.println("Inserting Tratamiento:");
+        System.out.println("ID: " + tratamiento.getId());
+        System.out.println("Fecha: " + tratamiento.getFecha());
+        System.out.println("Mascota ID: " + (tratamiento.getMascota() != null ? tratamiento.getMascota().getId() : "null"));
+        System.out.println("Medicamento ID: " + (tratamiento.getMedicamento() != null ? tratamiento.getMedicamento().getId() : "null"));
+        System.out.println("Veterinario ID: " + (tratamiento.getVeterinario() != null ? tratamiento.getVeterinario().getId() : "null"));
+        System.out.println("Cantidad: " + tratamiento.getCantidad());
+
+        repo.save(tratamiento);
     }
+}
+
     @Override
     public List<Tratamiento> findByVeterinarioId(Long veterinarioId) {
         return repo.findByVeterinarioId(veterinarioId);
