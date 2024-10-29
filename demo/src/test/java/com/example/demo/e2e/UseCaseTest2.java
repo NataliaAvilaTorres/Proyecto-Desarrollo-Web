@@ -63,16 +63,32 @@ public class UseCaseTest2 {
         WebElement addPropietarioLink = driver.findElement(By.id("add-tratamiento-link"));
         addPropietarioLink.click();
 
-        // Esperar a que se cargue el formulario
+        // Esperar a que se cargue el formulario y sus datos
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("mascota")));
 
-        // Seleccionar mascota
-        Select selectMascota = new Select(driver.findElement(By.id("mascota")));
-        selectMascota.selectByIndex(1); // Selecciona la primera mascota disponible
+        // Esperar a que las opciones del select de mascota estén cargadas
+        wait.until(ExpectedConditions.presenceOfNestedElementsLocatedBy(
+                By.id("mascota"), By.tagName("option")));
 
-        // Seleccionar medicamento
+        // Esperar a que las opciones del select de medicamento estén cargadas
+        wait.until(ExpectedConditions.presenceOfNestedElementsLocatedBy(
+                By.id("medicamento"), By.tagName("option")));
+
+        // Esperar a que el select de mascota sea clickeable
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("mascota")));
+
+        // Verificar que hay opciones disponibles antes de seleccionar
+        Select selectMascota = new Select(driver.findElement(By.id("mascota")));
+        wait.until(driver -> selectMascota.getOptions().size() > 1); // Espera a que haya más de 1 opción (contando el
+                                                                     // placeholder)
+
+        // Ahora es seguro seleccionar la mascota
+        selectMascota.selectByIndex(1);
+
+        // Hacer lo mismo para el medicamento
         Select selectMedicamento = new Select(driver.findElement(By.id("medicamento")));
-        selectMedicamento.selectByIndex(3); // Selecciona el primer medicamento disponible
+        wait.until(driver -> selectMedicamento.getOptions().size() > 1);
+        selectMedicamento.selectByIndex(97);
 
         // Ingresar unidades a suministrar
         WebElement unidadesInput = driver.findElement(By.id("unidades"));
@@ -91,11 +107,26 @@ public class UseCaseTest2 {
         assertEquals("Tratamiento creado correctamente", alert.getText());
         alert.accept();
 
-        WebElement mascotaList = driver.findElement(By.id("listado-mascotas-link"));
+        // Esperar a que el enlace de lista de mascotas esté presente y clickeable
+        WebElement mascotaList = wait.until(ExpectedConditions.elementToBeClickable(By.id("listado-mascotas-link")));
         mascotaList.click();
 
         WebElement verDetallesButton = driver.findElement(By.id("btn-detalles-1"));
         verDetallesButton.click();
-    }
 
+        driver.get(BASE_URL + "/login");
+
+        WebElement emailAdminInput = driver.findElement(By.id("email"));
+        WebElement passwordAdminInput = driver.findElement(By.id("password"));
+        WebElement roleAdmin = driver.findElement(By.id("role-admin"));
+        WebElement loginButtonAdmin = driver.findElement(By.id("login-btn"));
+
+        roleAdmin.click();
+        emailAdminInput.sendKeys("juan.admin@correo.com");
+        passwordAdminInput.sendKeys("admin123");
+        loginButtonAdmin.click();
+
+        wait.until(ExpectedConditions.urlToBe(BASE_URL + "/adminPanel"));
+        assertEquals(BASE_URL + "/adminPanel", driver.getCurrentUrl());
+    }
 }
