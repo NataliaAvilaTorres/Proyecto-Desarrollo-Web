@@ -248,12 +248,15 @@ public class DataBaseInit implements ApplicationRunner {
 
                 // ADMINISTRADORES
 
-                administradorRepository.save(
-                                new Administrador("1234567890", "Juan Pérez", "juan.admin@correo.com", "admin123"));
-                administradorRepository.save(
-                                new Administrador("1234567891", "María Gómez", "maria.admin@correo.com", "admin123"));
-                administradorRepository.save(new Administrador("1234567892", "Carlos Martínez",
-                                "carlos.admin@correo.com", "admin123"));
+
+                Administrador adminentity = Administrador.builder().cedula("1234567890").nombre("Juan Perez").contrasena("admin123").correo("admin@a.com").build();
+                administradorRepository.save(adminentity);
+
+                adminentity = Administrador.builder().cedula("1234567891").nombre("Maria Gomez").contrasena("admin123").correo("admin@b.com").build();
+                administradorRepository.save(adminentity);
+
+                adminentity = Administrador.builder().cedula("1234567892").nombre("Carlos Martinez").contrasena("admin123").correo("admin@c.com").build();
+                administradorRepository.save(adminentity);
 
         }
 
