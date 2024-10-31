@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.DTOs.AdministradorDTO;
+import com.DTOs.AdministradorMapper;
 import com.example.demo.model.Administrador;
 import com.example.demo.service.AdministradorService;
 
@@ -39,11 +41,17 @@ public class AdministradorController {
     }
 
     // Create a new admin
-    @PostMapping
-    public Administrador createAdministrador(@RequestBody Administrador administrador) {
-        administradorService.add(administrador);
-        return administrador;
-    }
+   @PostMapping
+public AdministradorDTO createAdministrador(@RequestBody AdministradorDTO administradorDTO) {
+    System.out.println("Entrando al método createAdministrador con los datos: " + administradorDTO);
+    
+    // Convertimos el DTO a entidad
+    Administrador administrador = AdministradorMapper.INSTANCE.convert(administradorDTO);
+    // Guardamos la entidad
+    administradorService.add(administrador);
+    // Convertimos la entidad guardada de vuelta a DTO y la retornamos
+    return AdministradorMapper.INSTANCE.convert(administrador);
+}
 
     // Update an existing admin by its ID
     @PutMapping("/{id}")
