@@ -216,34 +216,29 @@ public class DataBaseInitTest implements ApplicationRunner {
                 List<Veterinario> veterinarios = veterinarioRepository.findAll();
 
                 for (int i = 0; i < 10; i++) {
-                        Mascota mascota = mascotas.get(random.nextInt(mascotas.size()));
-                        Veterinario veterinario = veterinarios.get(random.nextInt(veterinarios.size()));
-                        // Seleccionar un medicamento con unidades disponibles
-                        Medicamento medicamento = null;
-                        while (medicamento == null) {
-                                Medicamento candidato = medicamentos.get(random.nextInt(medicamentos.size()));
-                                if (candidato.getUnidadesDisponibles() > 0) {  // Verificar disponibilidad
-                                    medicamento = candidato;
-                                }
-                        }
-
-                        // Actualizar unidades disponibles y vendidas
-                        medicamento.setUnidadesDisponibles(medicamento.getUnidadesDisponibles() - 1);
-                        medicamento.setUnidadesVendidas(medicamento.getUnidadesVendidas() + 1);
-                        medicamentoRepository.save(medicamento);  // Guardar cambios en el medicamento
-
-                        Date fecha = new Date(System.currentTimeMillis() - random.nextInt(1000000000)); // Fecha
-                                                                                                        // aleatoria
-
-                        Tratamiento tratamiento = new Tratamiento(fecha, 1);
-                        tratamiento.setMascota(mascota);
-                        tratamiento.setVeterinario(veterinario);
-                        tratamiento.setMedicamento(medicamento);
-                        System.out.println("Tratamiento generado: Mascota ID = " + mascota.getId()
-                                        + ", Veterinario ID = " + veterinario.getId() + ", Medicamento = "
-                                        + medicamento.getNombre());
-
-                        tratamientoRepository.save(tratamiento);
+                        Mascota mascota = mascotas.get(i % mascotas.size()); // Selección de mascota ciclando la lista
+                        Veterinario veterinario = veterinarios.get(i % veterinarios.size()); // Selección de veterinario ciclando la lista
+                        Medicamento medicamento = medicamentos.get(i); // Obtener el medicamento en el índice i (primeros 10)
+                        if (medicamento.getUnidadesDisponibles() > 0) {
+                                // Actualizar unidades disponibles y vendidas
+                                medicamento.setUnidadesDisponibles(medicamento.getUnidadesDisponibles() - 1);
+                                medicamento.setUnidadesVendidas(medicamento.getUnidadesVendidas() + 1);
+                                medicamentoRepository.save(medicamento);  // Guardar cambios en el medicamento
+                        
+                                Date fecha = new Date(System.currentTimeMillis() - i * 100000000); // Fecha aleatoria
+                        
+                                Tratamiento tratamiento = new Tratamiento(fecha, 1);
+                                tratamiento.setMascota(mascota);
+                                tratamiento.setVeterinario(veterinario);
+                                tratamiento.setMedicamento(medicamento);
+                                System.out.println("Tratamiento generado: Mascota ID = " + mascota.getId()
+                                                   + ", Veterinario ID = " + veterinario.getId() + ", Medicamento = "
+                                                   + medicamento.getNombre());
+                        
+                                tratamientoRepository.save(tratamiento);
+                            } else {
+                                System.out.println("El medicamento con ID " + medicamento.getId() + " no tiene unidades disponibles.");
+                            }
                 }
 
                 // ADMINISTRADORES
