@@ -23,6 +23,8 @@ import com.example.demo.repository.MedicamentoRepository;
 import com.example.demo.repository.PropietarioRepository;
 import com.example.demo.repository.TratamientoRepository;
 import com.example.demo.repository.VeterinarioRepository;
+import com.example.demo.repository.RoleRepository;
+import com.example.demo.model.Role;
 
 import jakarta.transaction.Transactional;
 
@@ -49,8 +51,22 @@ public class DataBaseInit implements ApplicationRunner {
         @Autowired
         MedicamentoRepository medicamentoRepository;
 
+        @Autowired
+        RoleRepository roleRepository;
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
+
+                // INICIALIZAR ROLES
+                if (roleRepository.findByName("ROLE_ADMIN") == null) {
+                    roleRepository.save(new Role(null, "ROLE_ADMIN"));
+                }
+                if (roleRepository.findByName("ROLE_VETERINARIO") == null) {
+                    roleRepository.save(new Role(null, "ROLE_VETERINARIO"));
+                }
+                if (roleRepository.findByName("ROLE_PROPETARIO") == null) {
+                    roleRepository.save(new Role(null, "ROLE_PROPETARIO"));
+                }
 
                 //VETERINARIOS
                 
